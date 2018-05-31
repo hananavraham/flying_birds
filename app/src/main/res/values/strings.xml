@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Flying_Birds</string>
+    <string name="title_activity_game1">game1</string>
+    <string name="title_activity_game">Game</string>
+</resources>
