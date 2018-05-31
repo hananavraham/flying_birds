@@ -8,18 +8,33 @@ import android.view.View;
 
 import java.util.Vector;
 
-public class Bird1{
+public class leftBird {
     private float posX;
     private float posY;
+    private int imageWidth;
+    private int imageHeight;
+    private int birdSpeed;
     private Bitmap image;
 
-    public Bird1(Context context, Bitmap bitmap) {
+    public leftBird(Context context, Bitmap bitmap) {
         this.image = bitmap;
+        imageWidth = bitmap.getWidth();
+        imageHeight = bitmap.getHeight();
     }
 
-    public void setCoord(float x, float y){
+    public void setBirdInfo(float x, float y, int speed){
         this.posY = y;
         this.posX = x;
+        this.birdSpeed = speed;
+    }
+
+    public int getImageWidth() {
+        return imageWidth;
+    }
+
+
+    public int getImageHeight() {
+        return imageHeight;
     }
 
     public float getX(){
@@ -36,8 +51,7 @@ public class Bird1{
     }
 
     private void update(){
-        this.posX += 5;
-        //this.poxY += 5;
+        this.posX += birdSpeed;
     }
 
 }
