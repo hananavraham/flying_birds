@@ -61,30 +61,27 @@ public class Game extends View {
             float x = event.getX();
             float y = event.getY();
 
+            //Move through all RIGHT birds and check if the user clicked on any of the RIGHT birds or not 
+            ListIterator it2 = rightBirds.listIterator();
+            while (it2.hasNext()) {
+                rightBird bir2 = (rightBird) it2.next();
+                if (x >= bir2.getX() && x < (bir2.getX()+bir2.getImageWidth()) && y >= bir2.getY() && y < (bir2.getY()+bir2.getImageHeight())) {
+                    rightBirds.remove(bir2);
+                    return true;
+                }
+            }
+
             //Move through all LEFT birds and check if the user clicked on any of the LEFT birds or not
             ListIterator it = leftBirds.listIterator();
             while (it.hasNext()) {
                 leftBird bir = (leftBird) it.next();
-//                Toast.makeText(this.getContext().getApplicationContext(), "touch:" +  String.valueOf(x) + "|" + String.valueOf(y) + "bird: " + String.valueOf(bir.getX() + "|" + String.valueOf(y)) ,Toast.LENGTH_LONG).show();
-//                if ((x - 100 <= bir.getX() && x + 100 >= bir.getX()) && (y - 200 <= bir.getY() && y +200 >= bir.getY())) {
-//                        leftBirds.remove(bir);
-//                        return true;
-//                }
                 if (x >= bir.getX() && x < (bir.getX()+bir.getImageWidth()) && y >= bir.getY() && y < (bir.getY()+bir.getImageHeight())) {
                     leftBirds.remove(bir);
                     return true;
                 }
             }
-            //Move through all RIGHT birds and check if the user clicked on any of the RIGHT birds or not - NOT WORKING ATM -
-//            ListIterator it2 = rightBirds.listIterator();
-//            while (it2.hasNext()) {
-//                rightBird bir2 = (rightBird) it.next();
-//                if (x <= bir2.getX() && x > (bir2.getX()+bir2.getImageWidth()) && y >= bir2.getY() && y < (bir2.getY()+bir2.getImageHeight())) {
-//                    rightBirds.remove(0);
-//                    return true;
-//                }
-//            }
         }
         return false;
     }
 }
+//                Toast.makeText(this.getContext().getApplicationContext(), "touch:" +  String.valueOf(x) + "|" + String.valueOf(y) + "bird: " + String.valueOf(bir.getX() + "|" + String.valueOf(y)) ,Toast.LENGTH_LONG).show();
