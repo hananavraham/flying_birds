@@ -17,9 +17,9 @@ public class new_game extends AppCompatActivity {
 
         final int sdk = android.os.Build.VERSION.SDK_INT;
         if(sdk < android.os.Build.VERSION_CODES.JELLY_BEAN) {
-            game.setBackgroundDrawable(ContextCompat.getDrawable(this, R.drawable.background1) );
+            game.setBackgroundDrawable(ContextCompat.getDrawable(this, R.drawable.background) );
         } else {
-            game.setBackground(ContextCompat.getDrawable(this, R.drawable.background1));
+            game.setBackground(ContextCompat.getDrawable(this, R.drawable.background));
         }
         setContentView(game);
     }
