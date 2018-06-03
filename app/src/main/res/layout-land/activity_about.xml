@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@drawable/background1"
-    tools:context=".about">
+    tools:context=".About">
 
     <TextView
         android:id="@+id/textView4"

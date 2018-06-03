@@ -2,11 +2,10 @@ package com.finalproject.hananavr.flying_birds;
 
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.view.View;
 
-public class Bird {
+public class Bird extends View {
     private float posX;
     private float posY;
     private int imageWidth;
@@ -15,24 +14,29 @@ public class Bird {
     private int birdSpeedY;
     private int tmpBirdSpeedX;
     private int tmpBirdSpeedY;
-    private Bitmap image;
-    private Bitmap deadImage;
+    protected int score;
+    protected int requiredClicksToKill;
+    protected int currentClicksCounter;
+    protected Bitmap aliveImage;
+    protected Bitmap deadImage;
     private boolean IsDead;
     private boolean IsRightDirection;
 
 
     public Bird(Context context, boolean RightDirection){
+        super(context);
         birdSpeedY = 0;
         IsDead = false;
         IsRightDirection = RightDirection;
+        currentClicksCounter = 0;
     }
 
     public void setBirdInfo(float x, float y, int speed){
         this.posY = y;
         this.posX = x;
         this.birdSpeedX = speed;
-        this.imageWidth = image.getWidth();
-        this.imageHeight = image.getHeight();
+        this.imageWidth = aliveImage.getWidth();
+        this.imageHeight = aliveImage.getHeight();
     }
 
 
@@ -51,7 +55,7 @@ public class Bird {
     }
 
     public void setImages(Bitmap image, Bitmap deadImage) {
-        this.image = image;
+        this.aliveImage = image;
         this.deadImage = deadImage;
     }
 
@@ -59,7 +63,29 @@ public class Bird {
 
     public void setDead(boolean dead) { IsDead = dead; }
 
+    public int getScore() {
+        return score;
+    }
 
+    public void setScore(int score) {
+        this.score = score;
+    }
+
+    public int getRequiredClicksToKill() {
+        return requiredClicksToKill;
+    }
+
+    public void setRequiredClicksToKill(int requiredClicksToKill) {
+        this.requiredClicksToKill = requiredClicksToKill;
+    }
+
+    public int getCurrentClicksCounter() {
+        return currentClicksCounter;
+    }
+
+    public void setCurrentClicksCounter(int currentClicksCounter) {
+        this.currentClicksCounter = currentClicksCounter;
+    }
 
     public void pausedState(){
         tmpBirdSpeedX = birdSpeedX;
@@ -74,15 +100,19 @@ public class Bird {
     }
 
     public void draw(Canvas canvas){
+        super.draw(canvas);
         if (!this.IsDead)
-            canvas.drawBitmap(image,posX,posY,null);
+            canvas.drawBitmap(aliveImage,posX,posY,null);
         else
             canvas.drawBitmap(deadImage,posX,posY,null);
         update();
     }
 
     private void update(){
-        this.posX -= birdSpeedX;
+        if(IsRightDirection)
+            this.posX += birdSpeedX;
+        else
+            this.posX -= birdSpeedX;
         this.posY += birdSpeedY;
     }
 }

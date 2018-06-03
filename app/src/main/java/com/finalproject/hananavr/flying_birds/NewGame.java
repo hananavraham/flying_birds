@@ -6,7 +6,7 @@ import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
 
-public class new_game extends AppCompatActivity {
+public class NewGame extends AppCompatActivity {
 
     Game game;
 

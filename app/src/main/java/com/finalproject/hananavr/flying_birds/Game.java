@@ -10,23 +10,17 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.view.MotionEvent;
 import android.view.View;
-import android.widget.Toast;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.ListIterator;
-
-import static java.lang.System.exit;
 
 public class Game extends View {
 
     ArrayList<Bird> birds = new ArrayList<>();
-    ArrayList<leftBird> leftBirds = new ArrayList<>();
-    ArrayList<rightBird> rightBirds = new ArrayList<>();
     Paint paint;
     InGameMenu igm;
-    Bitmap heart, inGameMenu, rightShooter, leftShooter, deadbird1, deadbird3;
-    int pause_flg, lives, fontSize, shooterDirection_flg;
+    Bitmap heart, inGameMenu, rightShooter, leftShooter;
+    int pause_flg, lives, fontSize, shooterDirection_flg, score;
 
 
     public Game(Context context) {
@@ -34,39 +28,33 @@ public class Game extends View {
         lives = 5;
         pause_flg = 0;
         shooterDirection_flg = 0;
+        score = 0;
         //Random r = new Random();
-//        Bitmap b1 = BitmapFactory.decodeResource(getResources(), R.drawable.bird1_1);
-//        leftBird bird = new leftBird(context, b1);
-//        bird.setBirdInfo(-260, 0, 5);
-//        leftBirds.add(bird);
-//
-//        leftBird leftBird = new leftBird(context,b1);
-//        leftBird.setBirdInfo(-260,500, 10);
-//        leftBirds.add(leftBird);
-//
-//        Bitmap b2 = BitmapFactory.decodeResource(getResources(), R.drawable.rightbird3);
-//        rightBird birdd = new rightBird(context,b2);
-//        birdd.setBirdInfo(Resources.getSystem().getDisplayMetrics().widthPixels,0, 8);
-//        rightBirds.add(birdd);
 
-        RedBird leftRed = new RedBird(context,true);
-        leftRed.setImages(BitmapFactory.decodeResource(getResources(), R.drawable.redbirdleft),BitmapFactory.decodeResource(getResources(), R.drawable.deadredbirdleft));
-        leftRed.setBirdInfo(-260,0, 5);
+        //Creating different type of birds
+        GreenBird leftGreen = new GreenBird(context,true);
+        leftGreen.setBirdInfo(-260,0, 5);
 
-        birds.add(leftRed);
+        birds.add(leftGreen);
 
-        leftRed = new RedBird(context,false);
-        leftRed.setImages(BitmapFactory.decodeResource(getResources(), R.drawable.redbirdleft),BitmapFactory.decodeResource(getResources(), R.drawable.deadredbirdleft));
-        leftRed.setBirdInfo(Resources.getSystem().getDisplayMetrics().widthPixels,400, 5);
+        BrownBird rightBrown = new BrownBird(context,false);
+        rightBrown.setBirdInfo(Resources.getSystem().getDisplayMetrics().widthPixels,400, 5);
 
-        birds.add(leftRed);
+        birds.add(rightBrown);
 
-        YellowBird rightYellow = new YellowBird(context,true);
-        rightYellow.setImages(BitmapFactory.decodeResource(getResources(), R.drawable.yellowbirdright),BitmapFactory.decodeResource(getResources(), R.drawable.deadyellowbirdright));
-        rightYellow.setBirdInfo(-260,400,5);
-        birds.add(rightYellow);
+        YellowBird leftYellow = new YellowBird(context,true);
+        leftYellow.setBirdInfo(-260,400,5);
+        birds.add(leftYellow);
 
-        
+        BarcaBird rightBarca = new BarcaBird(context,false);
+        rightBarca.setBirdInfo(Resources.getSystem().getDisplayMetrics().widthPixels,180,8);
+        birds.add(rightBarca);
+
+        Eagle leftEagle = new Eagle(context, true);
+        leftEagle.setBirdInfo(-260, 240, 6);
+        birds.add(leftEagle);
+
+
         //Setting for font style (used for showing the live left as text)
         fontSize = getResources().getDimensionPixelSize(R.dimen.myFontSize);
         paint = new Paint();
@@ -88,31 +76,11 @@ public class Game extends View {
         rightShooter = BitmapFactory.decodeResource(getResources(), R.drawable.rightshooter);
         leftShooter = BitmapFactory.decodeResource(getResources(), R.drawable.leftshooter);
 
-        //Pictures of dead birds for dead bird animation
-        deadbird1 = BitmapFactory.decodeResource(getResources(), R.drawable.deadbird1);
-        deadbird3 = BitmapFactory.decodeResource(getResources(), R.drawable.deadbird3);
-
     }
 
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-
-//        Iterator it = leftBirds.iterator();
-//        while (it.hasNext()) {
-//            leftBird bir = (leftBird) it.next();
-//            bir.draw(canvas);
-//            if(bir.isDead() && bir.getY() > Resources.getSystem().getDisplayMetrics().heightPixels)
-//                leftBirds.remove(bir);
-//        }
-//
-//        ListIterator it2 = rightBirds.listIterator();
-//        while (it2.hasNext()){
-//            rightBird bird = (rightBird) it2.next();
-//            bird.draw(canvas);
-//            if(bird.isDead() && bird.getY() > Resources.getSystem().getDisplayMetrics().heightPixels)
-//                rightBirds.remove(bird);
-//        }
 
         ListIterator it = birds.listIterator();
         while (it.hasNext()){
@@ -124,6 +92,9 @@ public class Game extends View {
 
         //Drawing heart image
         canvas.drawBitmap(heart,35,4,null);
+
+        //Drawing current score as text
+        canvas.drawText("Score: "+String.valueOf(score),95,fontSize, paint);
 
         //Drawing in game menu image
         canvas.drawBitmap(inGameMenu,Resources.getSystem().getDisplayMetrics().widthPixels-100,4,null);
@@ -142,27 +113,6 @@ public class Game extends View {
     }
 
     private void checkBirdPassingScreen() {
-//        ListIterator it = leftBirds.listIterator();
-//        while (it.hasNext()) {
-//            leftBird bir = (leftBird) it.next();
-//            if(bir.getX() > Resources.getSystem().getDisplayMetrics().widthPixels && !bir.isDead()){
-//                lives--;
-//                leftBirds.remove(bir);
-//                return;
-//            }
-//        }
-//
-//        ListIterator it2 = rightBirds.listIterator();
-//        while (it2.hasNext()){
-//            rightBird bird = (rightBird) it2.next();
-//            if(bird.getX()+bird.getImageWidth() < 0 && !bird.isDead())
-//            {
-//                lives--;
-//                rightBirds.remove(bird);
-//                return;
-//            }
-//        }
-
         ListIterator it = birds.listIterator();
         while (it.hasNext()){
             Bird bird = (Bird) it.next();
@@ -190,60 +140,47 @@ public class Game extends View {
             float x = event.getX();
             float y = event.getY();
 
+            //Check where the finger pressed to change shooter direction accordingly
             if(x <= Resources.getSystem().getDisplayMetrics().widthPixels/2)
                 shooterDirection_flg = 1;
             else
                 shooterDirection_flg = 0;
 
             if(pause_flg == 0){
-                //Move through all RIGHT birds and check if the user clicked on any of the RIGHT birds or not
-//                ListIterator it2 = rightBirds.listIterator();
-//                while (it2.hasNext()) {
-//                    rightBird bir2 = (rightBird) it2.next();
-//                    if (!bir2.isDead()) {
-//                        if(x >= bir2.getX() && x < (bir2.getX()+bir2.getImageWidth()) && y >= bir2.getY() && y < (bir2.getY()+bir2.getImageHeight()))
-//                        {
-//                            bir2.setImage(deadbird3);
-//                            bir2.setBirdSpeedY(10);
-//                            bir2.setDead(true);
-//                            return true;
+//                ListIterator it = birds.listIterator();
+//                while (it.hasNext()){
+//                    Bird bird = (Bird) it.next();
+//                    if(!bird.IsDead()){
+//                        if (bird.IsRightDirection()){
+//                            if(x >= bird.getX() && x < (bird.getX()+bird.getImageWidth()) && y >= bird.getY() && y < (bird.getY()+bird.getImageHeight()))
+//                            {
+//                                //bird.setImages(deadbird1);
+//                                bird.setBirdSpeedY(10);
+//                                bird.setDead(true);
+//                                return true;
+//                            }
+//                        }
+//                        else{
+//                            if(x >= bird.getX() && x < (bird.getX()+bird.getImageWidth()) && y >= bird.getY() && y < (bird.getY()+bird.getImageHeight()))
+//                            {
+//                                //bird.setImages(deadbird3);
+//                                bird.setBirdSpeedY(10);
+//                                bird.setDead(true);
+//                                return true;
+//                            }
 //                        }
 //                    }
 //                }
-//
-//                //Move through all LEFT birds and check if the user clicked on any of the LEFT birds or not
-//                ListIterator it = leftBirds.listIterator();
-//                while (it.hasNext()) {
-//                    leftBird bir = (leftBird) it.next();
-//                    if (!bir.isDead()) {
-//                        if(x >= bir.getX() && x < (bir.getX()+bir.getImageWidth()) && y >= bir.getY() && y < (bir.getY()+bir.getImageHeight()))
-//                        {
-//                            bir.setImage(deadbird1);
-//                            bir.setBirdSpeedY(10);
-//                            bir.setDead(true);
-//                            return true;
-//                        }
-//                    }
-//                }
-
+                //Check for every bird if the clicks count are enough to turn the bird dead
                 ListIterator it = birds.listIterator();
                 while (it.hasNext()){
                     Bird bird = (Bird) it.next();
                     if(!bird.IsDead()){
-                        if (bird.IsRightDirection()){
-                            if(x >= bird.getX() && x < (bird.getX()+bird.getImageWidth()) && y >= bird.getY() && y < (bird.getY()+bird.getImageHeight()))
-                            {
-                                //bird.setImages(deadbird1);
-                                bird.setBirdSpeedY(10);
-                                bird.setDead(true);
-                                return true;
-                            }
-                        }
-
-                        else{
-                            if(x >= bird.getX() && x < (bird.getX()+bird.getImageWidth()) && y >= bird.getY() && y < (bird.getY()+bird.getImageHeight()))
-                            {
-                                //bird.setImages(deadbird3);
+                        if(x >= bird.getX() && x < (bird.getX()+bird.getImageWidth()) && y >= bird.getY() && y < (bird.getY()+bird.getImageHeight()))
+                        {
+                            bird.currentClicksCounter++;
+                            if(bird.requiredClicksToKill == bird.currentClicksCounter){
+                                score += bird.score;
                                 bird.setBirdSpeedY(10);
                                 bird.setDead(true);
                                 return true;
@@ -252,24 +189,15 @@ public class Game extends View {
                     }
                 }
 
+                //Check if in game menu icon is pressed
                 if(x >= Resources.getSystem().getDisplayMetrics().widthPixels-100 && x < (Resources.getSystem().getDisplayMetrics().widthPixels-100+inGameMenu.getWidth()) && y >= 4 && y < (4+inGameMenu.getHeight())){
                     pause_flg = 1;
                     Thread pausedStateThread = new Thread(){
                         public void run(){
-//                            ListIterator it3 = leftBirds.listIterator();
-////                            while (it3.hasNext()) {
-////                                leftBird bir = (leftBird) it3.next();
-////                                bir.pausedState();
-////                            }
-////                            ListIterator it4 = rightBirds.listIterator();
-////                            while (it4.hasNext()) {
-////                                rightBird bir2 = (rightBird) it4.next();
-////                                bir2.pausedState();
-////                            }
                             ListIterator it = birds.listIterator();
                             while(it.hasNext()){
                                 Bird bird = (Bird) it.next();
-                                bird.pausedState();;
+                                bird.pausedState();
                             }
                         }
                     };
@@ -278,22 +206,12 @@ public class Game extends View {
                 }
             }
 
+            //If the in game menu is open, only checks this code section
             if(pause_flg == 1){
                 if(x >= 810 && x < (810+igm.getOptionWidth()) && y >= 265 && y < (265+igm.getOptionHeight()))
                 {
                     Thread runningStateThread = new Thread(){
                         public void run(){
-//                            ListIterator it = leftBirds.listIterator();
-//                            while (it.hasNext()) {
-//                                leftBird bir = (leftBird) it.next();
-//                                bir.runningState();
-//                            }
-//
-//                            ListIterator it2 = rightBirds.listIterator();
-//                            while (it2.hasNext()){
-//                                rightBird bird = (rightBird) it2.next();
-//                                bird.runningState();
-//                            }
                             ListIterator it = birds.listIterator();
                             while(it.hasNext()){
                                 Bird bird = (Bird) it.next();
@@ -327,4 +245,6 @@ public class Game extends View {
         return false;
     }
 }
+
+
 //                Toast.makeText(this.getContext().getApplicationContext(), "touch:" +  String.valueOf(x) + "|" + String.valueOf(y) + "bird: " + String.valueOf(bir.getX() + "|" + String.valueOf(y)) ,Toast.LENGTH_LONG).show();

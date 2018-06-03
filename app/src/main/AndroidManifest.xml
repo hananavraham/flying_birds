@@ -19,16 +19,16 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".result"
+            android:name=".Result"
             android:screenOrientation="landscape" />
         <activity
-            android:name=".help"
+            android:name=".Help"
             android:screenOrientation="landscape" />
         <activity
-            android:name=".about"
+            android:name=".About"
             android:screenOrientation="landscape" />
         <activity
-            android:name=".new_game"
+            android:name=".NewGame"
             android:screenOrientation="landscape" />
     </application>
 

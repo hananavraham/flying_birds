@@ -7,7 +7,7 @@
     android:orientation="vertical"
     android:gravity="center"
     android:background="@drawable/background1"
-    tools:context=".result">
+    tools:context=".Result">
 
     <TextView
         android:id="@+id/textView"
