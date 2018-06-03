@@ -22,6 +22,7 @@ public class Bird {
 
 
     public Bird(Context context, boolean RightDirection){
+        birdSpeedY = 0;
         IsDead = false;
         IsRightDirection = RightDirection;
     }
@@ -30,6 +31,8 @@ public class Bird {
         this.posY = y;
         this.posX = x;
         this.birdSpeedX = speed;
+        this.imageWidth = image.getWidth();
+        this.imageHeight = image.getHeight();
     }
 
 
@@ -71,7 +74,10 @@ public class Bird {
     }
 
     public void draw(Canvas canvas){
-        canvas.drawBitmap(image,posX,posY,null);
+        if (!this.IsDead)
+            canvas.drawBitmap(image,posX,posY,null);
+        else
+            canvas.drawBitmap(deadImage,posX,posY,null);
         update();
     }
 

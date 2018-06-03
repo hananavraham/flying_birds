@@ -13,6 +13,7 @@ public class RedBird extends Bird{
         super(context, RightDirection);
         score = 10;
         ShootToKill = 1;
+
     }
 
     public int getScore() { return score; }
