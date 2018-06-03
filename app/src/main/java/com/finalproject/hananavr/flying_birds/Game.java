@@ -20,6 +20,7 @@ import static java.lang.System.exit;
 
 public class Game extends View {
 
+    ArrayList<Bird> birds = new ArrayList<>();
     ArrayList<leftBird> leftBirds = new ArrayList<>();
     ArrayList<rightBird> rightBirds = new ArrayList<>();
     Paint paint;
@@ -34,19 +35,31 @@ public class Game extends View {
         pause_flg = 0;
         shooterDirection_flg = 0;
         //Random r = new Random();
-        Bitmap b1 = BitmapFactory.decodeResource(getResources(), R.drawable.bird1_1);
-        leftBird bird = new leftBird(context, b1);
-        bird.setBirdInfo(-260, 0, 5);
-        leftBirds.add(bird);
+//        Bitmap b1 = BitmapFactory.decodeResource(getResources(), R.drawable.bird1_1);
+//        leftBird bird = new leftBird(context, b1);
+//        bird.setBirdInfo(-260, 0, 5);
+//        leftBirds.add(bird);
+//
+//        leftBird leftBird = new leftBird(context,b1);
+//        leftBird.setBirdInfo(-260,500, 10);
+//        leftBirds.add(leftBird);
+//
+//        Bitmap b2 = BitmapFactory.decodeResource(getResources(), R.drawable.rightbird3);
+//        rightBird birdd = new rightBird(context,b2);
+//        birdd.setBirdInfo(Resources.getSystem().getDisplayMetrics().widthPixels,0, 8);
+//        rightBirds.add(birdd);
 
-        leftBird leftBird = new leftBird(context,b1);
-        leftBird.setBirdInfo(-260,500, 10);
-        leftBirds.add(leftBird);
+        RedBird rightRed = new RedBird(context,true);
+        rightRed.setImages(BitmapFactory.decodeResource(getResources(), R.drawable.redbirdright),BitmapFactory.decodeResource(getResources(), R.drawable.deadredbirdright));
+        rightRed.setBirdInfo(Resources.getSystem().getDisplayMetrics().widthPixels,0, 8);
 
-        Bitmap b2 = BitmapFactory.decodeResource(getResources(), R.drawable.rightbird3);
-        rightBird birdd = new rightBird(context,b2);
-        birdd.setBirdInfo(Resources.getSystem().getDisplayMetrics().widthPixels,0, 8);
-        rightBirds.add(birdd);
+        birds.add(rightRed);
+
+        rightRed = new RedBird(context,true);
+        rightRed.setImages(BitmapFactory.decodeResource(getResources(), R.drawable.redbirdright),BitmapFactory.decodeResource(getResources(), R.drawable.deadredbirdright));
+        rightRed.setBirdInfo(-260,400, 12);
+
+        birds.add(rightRed);
 
         //Setting for font style (used for showing the live left as text)
         fontSize = getResources().getDimensionPixelSize(R.dimen.myFontSize);
@@ -79,22 +92,27 @@ public class Game extends View {
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
 
-        Iterator it = leftBirds.iterator();
-        while (it.hasNext()) {
-            leftBird bir = (leftBird) it.next();
-            bir.draw(canvas);
-            if(bir.isDead() && bir.getY() > Resources.getSystem().getDisplayMetrics().heightPixels)
-                leftBirds.remove(bir);
-        }
+//        Iterator it = leftBirds.iterator();
+//        while (it.hasNext()) {
+//            leftBird bir = (leftBird) it.next();
+//            bir.draw(canvas);
+//            if(bir.isDead() && bir.getY() > Resources.getSystem().getDisplayMetrics().heightPixels)
+//                leftBirds.remove(bir);
+//        }
+//
+//        ListIterator it2 = rightBirds.listIterator();
+//        while (it2.hasNext()){
+//            rightBird bird = (rightBird) it2.next();
+//            bird.draw(canvas);
+//            if(bird.isDead() && bird.getY() > Resources.getSystem().getDisplayMetrics().heightPixels)
+//                rightBirds.remove(bird);
+//        }
 
-        ListIterator it2 = rightBirds.listIterator();
-        while (it2.hasNext()){
-            rightBird bird = (rightBird) it2.next();
+        ListIterator it = birds.listIterator();
+        while (it.hasNext()){
+            Bird bird = (Bird) it.next();
             bird.draw(canvas);
-            if(bird.isDead() && bird.getY() > Resources.getSystem().getDisplayMetrics().heightPixels)
-                rightBirds.remove(bird);
         }
-
         //Drawing lives left as text
         canvas.drawText(String.valueOf(lives),10,fontSize, paint);
 
