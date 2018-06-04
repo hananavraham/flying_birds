@@ -20,8 +20,7 @@ public class Game extends View {
     Paint paint;
     InGameMenu igm;
     Bitmap heart, inGameMenu, rightShooter, leftShooter;
-    int pause_flg, lives, fontSize, shooterDirection_flg;
-    static int score;
+    int pause_flg, lives, fontSize, shooterDirection_flg, score;
 
 
     public Game(Context context) {
@@ -119,20 +118,37 @@ public class Game extends View {
             Bird bird = (Bird) it.next();
             if (bird.IsRightDirection()){
                 if(bird.getX() > Resources.getSystem().getDisplayMetrics().widthPixels && !bird.IsDead()){
-                    lives--;
+                    if(lives > 0)
+                        lives--;
                     if (lives == 0){    // Game Over
-                        getContext().startActivity(new Intent(getContext(),Result.class));
+                        Thread resultThread = new Thread(){
+                            public void run(){
+                                Intent backToMainMenu = new Intent(getContext(), Result.class);
+                                backToMainMenu.putExtra("SCORE",score);
+                                getContext().startActivity(backToMainMenu);
+                            }
+                        };
+                        resultThread.start();
+                        //getContext().startActivity(new Intent(getContext(),Result.class));
                     }
                     birds.remove(bird);
                     return;
                 }
             }
-
             else{
                 if(bird.getX()+bird.getImageWidth() < 0 && !bird.IsDead()) {
-                    lives--;
+                    if(lives > 0)
+                        lives--;
                     if (lives == 0){    // Game Over
-                        getContext().startActivity(new Intent(getContext(),Result.class));
+                        Thread resultThread = new Thread(){
+                            public void run(){
+                                Intent backToMainMenu = new Intent(getContext(), Result.class);
+                                backToMainMenu.putExtra("SCORE",score);
+                                getContext().startActivity(backToMainMenu);
+                            }
+                        };
+                        resultThread.start();
+                        //getContext().startActivity(new Intent(getContext(),Result.class));
                     }
                     birds.remove(bird);
                     return;

@@ -10,12 +10,17 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.List;
+
 public class Result extends AppCompatActivity {
-    int highscore;
+    List<High_Score> highscore;
+    int scoreFromCurrentGame;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_result);
+
+        scoreFromCurrentGame = getIntent().getIntExtra("SCORE",0);
 
         TextView scoreLabel = (TextView) findViewById(R.id.scoreLabel);
         TextView highScoreLabel = (TextView) findViewById(R.id.highScoreLabel);
@@ -24,29 +29,31 @@ public class Result extends AppCompatActivity {
         // creating database instnace
         AppDataBase db = Room.databaseBuilder(getApplicationContext(), AppDataBase.class,"score")
                 .allowMainThreadQueries()
+                .fallbackToDestructiveMigration()
                 .build();
-        //db.high_scoreDao().insertHighScore(new High_Score(50));
-        highscore = db.high_scoreDao().getHighScore();     // get highscore
+        db.high_scoreDao().insertHighScore(new High_Score(50));
+        highscore = db.high_scoreDao().getHighScore();     // get highscore - THIS LINE CRASHED THE GAME -
 
 
         //Game.score = getIntent().getIntExtra("SCORE",0);
-        scoreLabel.setText(Game.score + "");
+        scoreLabel.setText(scoreFromCurrentGame + "");
 
         SharedPreferences settings = getSharedPreferences("GAME_DATA", Context.MODE_PRIVATE);
 
         //Game.highScore = settings.getInt("HIGE_SCORE",0);
 
-        if(Game.score > NewGame.highScore){
-            highScoreLabel.setText("High Score : " + Game.score);
-            NewGame.highScore = Game.score;
-            db.high_scoreDao().updateHighScore(new High_Score(highscore));
+        //NewGame.highScore
+        if(scoreFromCurrentGame > highscore.get(0).getHighScore()){
+            highScoreLabel.setText("Congratulations! New High Score is: " + scoreFromCurrentGame);
+            NewGame.highScore = scoreFromCurrentGame;
+            db.high_scoreDao().updateHighScore(new High_Score(scoreFromCurrentGame));
             SharedPreferences.Editor editor = settings.edit();
-            editor.putInt("HIGH_SCORE", Game.score);
+            editor.putInt("HIGH_SCORE", scoreFromCurrentGame);
             editor.commit();
         }
 
         else{
-            highScoreLabel.setText("High Score : " + NewGame.highScore);
+            highScoreLabel.setText(" Previous High Score is: " + highscore.get(0).getHighScore());
         }
     }
 

@@ -4,8 +4,11 @@ import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.PrimaryKey;
 
-@Entity (tableName = "highscore", primaryKeys = {"high_score"})
+@Entity (tableName = "HighScoreTable")
 public class High_Score {
+
+    @PrimaryKey(autoGenerate = true)
+    private int id;
 
     @ColumnInfo(name = "high_score")
     private int highScore;
@@ -22,5 +25,11 @@ public class High_Score {
         this.highScore = highScore;
     }
 
+    public int getId() {
+        return id;
+    }
 
+    public void setId(int id) {
+        this.id = id;
+    }
 }

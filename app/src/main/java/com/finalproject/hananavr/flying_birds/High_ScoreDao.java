@@ -9,8 +9,8 @@ import java.util.List;
 
 @Dao
 public interface High_ScoreDao {
-    @Query("SELECT high_score from highscore")
-    int getHighScore();
+    @Query("SELECT * FROM HighScoreTable")
+    List<High_Score> getHighScore();
 
     @Insert
     void insertHighScore(High_Score high_score);
