@@ -147,30 +147,6 @@ public class Game extends View {
                 shooterDirection_flg = 0;
 
             if(pause_flg == 0){
-//                ListIterator it = birds.listIterator();
-//                while (it.hasNext()){
-//                    Bird bird = (Bird) it.next();
-//                    if(!bird.IsDead()){
-//                        if (bird.IsRightDirection()){
-//                            if(x >= bird.getX() && x < (bird.getX()+bird.getImageWidth()) && y >= bird.getY() && y < (bird.getY()+bird.getImageHeight()))
-//                            {
-//                                //bird.setImages(deadbird1);
-//                                bird.setBirdSpeedY(10);
-//                                bird.setDead(true);
-//                                return true;
-//                            }
-//                        }
-//                        else{
-//                            if(x >= bird.getX() && x < (bird.getX()+bird.getImageWidth()) && y >= bird.getY() && y < (bird.getY()+bird.getImageHeight()))
-//                            {
-//                                //bird.setImages(deadbird3);
-//                                bird.setBirdSpeedY(10);
-//                                bird.setDead(true);
-//                                return true;
-//                            }
-//                        }
-//                    }
-//                }
                 //Check for every bird if the clicks count are enough to turn the bird dead
                 ListIterator it = birds.listIterator();
                 while (it.hasNext()){
