@@ -20,12 +20,13 @@ public class Game extends View {
     Paint paint;
     InGameMenu igm;
     Bitmap heart, inGameMenu, rightShooter, leftShooter;
-    int pause_flg, lives, fontSize, shooterDirection_flg, score;
+    int pause_flg, lives, fontSize, shooterDirection_flg;
+    static int score;
 
 
     public Game(Context context) {
         super(context);
-        lives = 5;
+        lives = 2;
         pause_flg = 0;
         shooterDirection_flg = 0;
         score = 0;
@@ -118,15 +119,21 @@ public class Game extends View {
             Bird bird = (Bird) it.next();
             if (bird.IsRightDirection()){
                 if(bird.getX() > Resources.getSystem().getDisplayMetrics().widthPixels && !bird.IsDead()){
-                lives--;
-                birds.remove(bird);
-                return;
+                    lives--;
+                    if (lives == 0){    // Game Over
+                        getContext().startActivity(new Intent(getContext(),Result.class));
+                    }
+                    birds.remove(bird);
+                    return;
                 }
             }
 
             else{
                 if(bird.getX()+bird.getImageWidth() < 0 && !bird.IsDead()) {
                     lives--;
+                    if (lives == 0){    // Game Over
+                        getContext().startActivity(new Intent(getContext(),Result.class));
+                    }
                     birds.remove(bird);
                     return;
                 }
