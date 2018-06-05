@@ -17,8 +17,8 @@ public class Bird extends View {
     protected int score;
     protected int requiredClicksToKill;
     protected int currentClicksCounter;
-    protected int imageFlg;
-    protected int imageFlg2;
+    private int imageFlg;
+    private int imageFlg2;
     protected Bitmap aliveWingsUpImage;
     protected Bitmap aliveWingsDownImage;
     protected Bitmap deadImage;
@@ -33,7 +33,6 @@ public class Bird extends View {
         IsRightDirection = RightDirection;
         currentClicksCounter = 0;
         imageFlg = 1;
-        imageFlg2 = 0;
     }
 
     public void setBirdInfo(float x, float y, int speed){
@@ -57,6 +56,10 @@ public class Bird extends View {
 
     public void setBirdSpeedY(int birdSpeedY) {
         this.birdSpeedY = birdSpeedY;
+    }
+
+    public void setBirdSpeedX(int birdSpeedX) {
+        this.birdSpeedX = birdSpeedX;
     }
 
     public boolean IsDead() { return IsDead; }
@@ -99,18 +102,20 @@ public class Bird extends View {
         birdSpeedY = tmpBirdSpeedY;
     }
 
-    public void draw(Canvas canvas){
+    public void draw(Canvas canvas, int pause_flg){
         super.draw(canvas);
         if (!this.IsDead){
             if(imageFlg==1){
                 canvas.drawBitmap(aliveWingsUpImage,posX,posY,null);
-                imageFlg2++;
+                if(pause_flg == 0)
+                    imageFlg2++;
                 if(imageFlg2==10)
                     imageFlg=0;
             }
             else if(imageFlg==0) {
                 canvas.drawBitmap(aliveWingsDownImage,posX,posY,null);
-                imageFlg2--;
+                if(pause_flg == 0)
+                    imageFlg2--;
                 if(imageFlg2==0)
                     imageFlg=1;
             }

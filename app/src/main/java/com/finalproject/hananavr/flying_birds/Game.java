@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.ListIterator;
 import java.util.Random;
 import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
@@ -26,7 +27,11 @@ public class Game extends View {
     InGameMenu igm;
     Bitmap heart, inGameMenu, rightShooter, leftShooter;
     int pause_flg, lives, fontSize, shooterDirection_flg, score;
+
+    //Variables needed for proper random bird creation logic
     Runnable runnable;
+    ScheduledExecutorService service;
+    Future<?> future;
 
     public Game(Context context) {
         super(context);
@@ -155,8 +160,8 @@ public class Game extends View {
 
             }
         };
-        ScheduledExecutorService service = Executors.newSingleThreadScheduledExecutor();
-        service.scheduleAtFixedRate(runnable, 5, 3, TimeUnit.SECONDS);
+        service = Executors.newSingleThreadScheduledExecutor();
+        future = service.scheduleAtFixedRate(runnable, 5, 3, TimeUnit.SECONDS);
     }
 
     @Override
@@ -166,7 +171,7 @@ public class Game extends View {
         ListIterator it = birds.listIterator();
         while (it.hasNext()){
             Bird bird = (Bird) it.next();
-            bird.draw(canvas);
+            bird.draw(canvas, pause_flg);
         }
         //Drawing lives left as text
         canvas.drawText(String.valueOf(lives),10,fontSize, paint);
@@ -262,6 +267,7 @@ public class Game extends View {
                             if(bird.requiredClicksToKill == bird.currentClicksCounter){
                                 score += bird.score;
                                 bird.setBirdSpeedY(10);
+                                bird.setBirdSpeedX(10);
                                 bird.setDead(true);
                                 return true;
                             }
@@ -272,6 +278,7 @@ public class Game extends View {
                 //Check if in game menu icon is pressed
                 if(x >= Resources.getSystem().getDisplayMetrics().widthPixels-100 && x < (Resources.getSystem().getDisplayMetrics().widthPixels-100+inGameMenu.getWidth()) && y >= 4 && y < (4+inGameMenu.getHeight())){
                     pause_flg = 1;
+                    future.cancel(true);
                     Thread pausedStateThread = new Thread(){
                         public void run(){
                             ListIterator it = birds.listIterator();
@@ -288,8 +295,10 @@ public class Game extends View {
 
             //If the in game menu is open, only checks this code section
             if(pause_flg == 1){
+                //If resume option is pressed
                 if(x >= 810 && x < (810+igm.getOptionWidth()) && y >= 265 && y < (265+igm.getOptionHeight()))
                 {
+                    future = service.scheduleAtFixedRate(runnable, 2, 3, TimeUnit.SECONDS);
                     Thread runningStateThread = new Thread(){
                         public void run(){
                             ListIterator it = birds.listIterator();
@@ -302,6 +311,7 @@ public class Game extends View {
                     runningStateThread.start();
                     pause_flg = 0;
                 }
+                //If back to main menu option is pressed
                 if(x >= 810 && x < (810+igm.getOptionWidth()) && y >= 350 && y < (350+igm.getOptionHeight())){
                     Thread backToMainMenuThread = new Thread(){
                         public void run(){
@@ -311,6 +321,7 @@ public class Game extends View {
                     backToMainMenuThread.start();
                     return true;
                 }
+                //If exit option is pressed
                 if(x >= 810 && x < (810+igm.getOptionWidth()) && y >= 435 && y < (435+igm.getOptionHeight())){
                     Thread exitGameThread = new Thread(){
                         public void run(){
