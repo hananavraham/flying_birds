@@ -30,25 +30,25 @@ public class Game extends View {
         shooterDirection_flg = 0;
         score = 0;
         //Random r = new Random();
-
+        
         //Creating different type of birds
-        GreenBird leftGreen = new GreenBird(context,true);
-        leftGreen.setBirdInfo(-260,0, 5);
+        RedBird leftRed = new RedBird(context,true);
+        leftRed.setBirdInfo(-260,0, 5);
 
-        birds.add(leftGreen);
+        birds.add(leftRed);
 
-        BrownBird rightBrown = new BrownBird(context,false);
-        rightBrown.setBirdInfo(Resources.getSystem().getDisplayMetrics().widthPixels,400, 5);
+        GreyBird rightGrey = new GreyBird(context,false);
+        rightGrey.setBirdInfo(Resources.getSystem().getDisplayMetrics().widthPixels,400, 5);
 
-        birds.add(rightBrown);
+        birds.add(rightGrey);
 
         YellowBird leftYellow = new YellowBird(context,true);
         leftYellow.setBirdInfo(-260,400,5);
         birds.add(leftYellow);
 
-        BarcaBird rightBarca = new BarcaBird(context,false);
-        rightBarca.setBirdInfo(Resources.getSystem().getDisplayMetrics().widthPixels,180,8);
-        birds.add(rightBarca);
+        PoliceBird rightPolice = new PoliceBird(context,false);
+        rightPolice.setBirdInfo(Resources.getSystem().getDisplayMetrics().widthPixels,180,8);
+        birds.add(rightPolice);
 
         Eagle leftEagle = new Eagle(context, true);
         leftEagle.setBirdInfo(-260, 240, 6);

@@ -9,11 +9,13 @@ public class Eagle extends Bird {
         super(context, RightDirection);
 
         if(RightDirection){
-            super.aliveImage = BitmapFactory.decodeResource(getResources(), R.drawable.eagle_right_dir);
-            super.deadImage = BitmapFactory.decodeResource(getResources(), R.drawable.eagle_dead_right_dir);
+            super.aliveWingsUpImage = BitmapFactory.decodeResource(getResources(), R.drawable.eagle_lr_frame_1);
+            super.aliveWingsDownImage = BitmapFactory.decodeResource(getResources(), R.drawable.eagle_lr_frame_2);
+            super.deadImage = BitmapFactory.decodeResource(getResources(), R.drawable.deadeagle_lr_frame_1);
         }else{
-            super.aliveImage = BitmapFactory.decodeResource(getResources(), R.drawable.eagle_left_dir);
-            super.deadImage = BitmapFactory.decodeResource(getResources(), R.drawable.eagle_dead_left_dir);
+            super.aliveWingsUpImage = BitmapFactory.decodeResource(getResources(), R.drawable.eagle_rl_frame_1);
+            super.aliveWingsDownImage = BitmapFactory.decodeResource(getResources(), R.drawable.eagle_rl_frame_2);
+            super.deadImage = BitmapFactory.decodeResource(getResources(), R.drawable.deadeagle_rl_frame_1);
         }
 
         super.score = 200;

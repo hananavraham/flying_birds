@@ -9,11 +9,13 @@ public class YellowBird extends Bird {
         super(context, RightDirection);
 
         if(RightDirection){
-            super.aliveImage = BitmapFactory.decodeResource(getResources(), R.drawable.yellow_bird_right_dir);
-            super.deadImage = BitmapFactory.decodeResource(getResources(), R.drawable.yellow_dead_bird_right_dir);
+            super.aliveWingsUpImage = BitmapFactory.decodeResource(getResources(), R.drawable.yellow_lr_frame_1);
+            super.aliveWingsDownImage = BitmapFactory.decodeResource(getResources(), R.drawable.yellow_lr_frame_2);
+            super.deadImage = BitmapFactory.decodeResource(getResources(), R.drawable.yellow_lr_deadframe_1);
         }else{
-            super.aliveImage = BitmapFactory.decodeResource(getResources(), R.drawable.yellow_bird_left_dir);
-            super.deadImage = BitmapFactory.decodeResource(getResources(), R.drawable.yellow_dead_bird_left_dir);
+            super.aliveWingsUpImage = BitmapFactory.decodeResource(getResources(), R.drawable.yellow_rl_frame_1);
+            super.aliveWingsDownImage = BitmapFactory.decodeResource(getResources(), R.drawable.yellow_rl_frame_2);
+            super.deadImage = BitmapFactory.decodeResource(getResources(), R.drawable.yellow_rl_deadframe_1);
         }
 
         super.score = 20;

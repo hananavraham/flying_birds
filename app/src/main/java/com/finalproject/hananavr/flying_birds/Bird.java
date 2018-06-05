@@ -17,7 +17,10 @@ public class Bird extends View {
     protected int score;
     protected int requiredClicksToKill;
     protected int currentClicksCounter;
-    protected Bitmap aliveImage;
+    protected int imageFlg;
+    protected int imageFlg2;
+    protected Bitmap aliveWingsUpImage;
+    protected Bitmap aliveWingsDownImage;
     protected Bitmap deadImage;
     private boolean IsDead;
     private boolean IsRightDirection;
@@ -29,14 +32,16 @@ public class Bird extends View {
         IsDead = false;
         IsRightDirection = RightDirection;
         currentClicksCounter = 0;
+        imageFlg = 1;
+        imageFlg2 = 0;
     }
 
     public void setBirdInfo(float x, float y, int speed){
         this.posY = y;
         this.posX = x;
         this.birdSpeedX = speed;
-        this.imageWidth = aliveImage.getWidth();
-        this.imageHeight = aliveImage.getHeight();
+        this.imageWidth = aliveWingsUpImage.getWidth();
+        this.imageHeight = aliveWingsUpImage.getHeight();
     }
 
 
@@ -52,11 +57,6 @@ public class Bird extends View {
 
     public void setBirdSpeedY(int birdSpeedY) {
         this.birdSpeedY = birdSpeedY;
-    }
-
-    public void setImages(Bitmap image, Bitmap deadImage) {
-        this.aliveImage = image;
-        this.deadImage = deadImage;
     }
 
     public boolean IsDead() { return IsDead; }
@@ -101,8 +101,20 @@ public class Bird extends View {
 
     public void draw(Canvas canvas){
         super.draw(canvas);
-        if (!this.IsDead)
-            canvas.drawBitmap(aliveImage,posX,posY,null);
+        if (!this.IsDead){
+            if(imageFlg==1){
+                canvas.drawBitmap(aliveWingsUpImage,posX,posY,null);
+                imageFlg2++;
+                if(imageFlg2==10)
+                    imageFlg=0;
+            }
+            else if(imageFlg==0) {
+                canvas.drawBitmap(aliveWingsDownImage,posX,posY,null);
+                imageFlg2--;
+                if(imageFlg2==0)
+                    imageFlg=1;
+            }
+        }
         else
             canvas.drawBitmap(deadImage,posX,posY,null);
         update();
