@@ -2,4 +2,6 @@
     <string name="app_name">Flying_Birds</string>
     <string name="title_activity_game1">game1</string>
     <string name="title_activity_game">Game</string>
+    <string name="game_over">GAME OVER</string>
+    <string name="try_again">Try Again</string>
 </resources>
