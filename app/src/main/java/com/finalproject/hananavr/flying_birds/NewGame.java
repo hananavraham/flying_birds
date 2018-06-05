@@ -8,7 +8,6 @@ import android.view.View;
 
 public class NewGame extends AppCompatActivity {
 
-    static int highScore = 0;
     Game game;
 
     @Override
