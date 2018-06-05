@@ -26,7 +26,7 @@ public class Game extends View {
     Paint paint;
     InGameMenu igm;
     Bitmap heart, inGameMenu, rightShooter, leftShooter;
-    int pause_flg, lives, fontSize, shooterDirection_flg, score;
+    int pause_flg, lives, fontSize, shooterDirection_flg, score, difficultyChanger;
 
     //Variables needed for proper random bird creation logic
     Runnable runnable;
@@ -39,30 +39,7 @@ public class Game extends View {
         pause_flg = 0;
         shooterDirection_flg = 0;
         score = 0;
-        
-        //Creating different type of birds
-//        RedBird leftRed = new RedBird(context,true);
-//        leftRed.setBirdInfo(-260,0, 5);
-//
-//        birds.add(leftRed);
-//
-//        GreyBird rightGrey = new GreyBird(context,false);
-//        rightGrey.setBirdInfo(Resources.getSystem().getDisplayMetrics().widthPixels,400, 5);
-//
-//        birds.add(rightGrey);
-//
-//        YellowBird leftYellow = new YellowBird(context,true);
-//        leftYellow.setBirdInfo(-260,400,5);
-//        birds.add(leftYellow);
-//
-//        PoliceBird rightPolice = new PoliceBird(context,false);
-//        rightPolice.setBirdInfo(Resources.getSystem().getDisplayMetrics().widthPixels,180,8);
-//        birds.add(rightPolice);
-//
-//        Eagle leftEagle = new Eagle(context, true);
-//        leftEagle.setBirdInfo(-260, 240, 6);
-//        birds.add(leftEagle);
-
+        difficultyChanger = 5;
 
         //Setting for font style (used for showing the live left as text)
         fontSize = getResources().getDimensionPixelSize(R.dimen.myFontSize);
@@ -94,17 +71,28 @@ public class Game extends View {
             public void run() {
                 boolean rndBool;
                 Random r = new Random();
+                if(score > 1500)
+                    difficultyChanger += 3;
+                if(score > 3000)
+                    difficultyChanger += 3;
+                if(score > 4500)
+                    difficultyChanger += 3;
+                if(score > 6000)
+                    difficultyChanger += 3;
+                if(score > 7500)
+                    difficultyChanger += 3;
+
                 int rndBirdNum = r.nextInt(5)+1;
                 switch (rndBirdNum){
                     case 1:
                         rndBool = r.nextBoolean();
                         if(rndBool == true){
                             RedBird leftRed = new RedBird(getContext(),rndBool);
-                            leftRed.setBirdInfo(-260,r.nextInt(600), r.nextInt(6)+5);
+                            leftRed.setBirdInfo(-260,r.nextInt(600), r.nextInt(difficultyChanger)+difficultyChanger);
                             birds.add(leftRed);
                         }else{
                             RedBird rightRed = new RedBird(getContext(),rndBool);
-                            rightRed.setBirdInfo(Resources.getSystem().getDisplayMetrics().widthPixels,r.nextInt(600), r.nextInt(6)+5);
+                            rightRed.setBirdInfo(Resources.getSystem().getDisplayMetrics().widthPixels,r.nextInt(600), r.nextInt(difficultyChanger)+difficultyChanger);
                             birds.add(rightRed);
                         }
                         break;
@@ -112,11 +100,11 @@ public class Game extends View {
                         rndBool = r.nextBoolean();
                         if(rndBool == true){
                             YellowBird leftYellow = new YellowBird(getContext(),rndBool);
-                            leftYellow.setBirdInfo(-260,r.nextInt(600),r.nextInt(6)+5);
+                            leftYellow.setBirdInfo(-260,r.nextInt(600),r.nextInt(difficultyChanger)+difficultyChanger);
                             birds.add(leftYellow);
                         }else{
                             YellowBird rightYellow = new YellowBird(getContext(),rndBool);
-                            rightYellow.setBirdInfo(Resources.getSystem().getDisplayMetrics().widthPixels,r.nextInt(600),r.nextInt(6)+5);
+                            rightYellow.setBirdInfo(Resources.getSystem().getDisplayMetrics().widthPixels,r.nextInt(600),r.nextInt(difficultyChanger)+difficultyChanger);
                             birds.add(rightYellow);
                         }
                         break;
@@ -124,11 +112,11 @@ public class Game extends View {
                         rndBool = r.nextBoolean();
                         if(rndBool == true){
                             GreyBird leftGrey = new GreyBird(getContext(),rndBool);
-                            leftGrey.setBirdInfo(-260,r.nextInt(600), r.nextInt(6)+5);
+                            leftGrey.setBirdInfo(-260,r.nextInt(600), r.nextInt(difficultyChanger)+difficultyChanger);
                             birds.add(leftGrey);
                         }else{
                             GreyBird rightGrey = new GreyBird(getContext(),rndBool);
-                            rightGrey.setBirdInfo(Resources.getSystem().getDisplayMetrics().widthPixels,r.nextInt(600), r.nextInt(6)+5);
+                            rightGrey.setBirdInfo(Resources.getSystem().getDisplayMetrics().widthPixels,r.nextInt(600), r.nextInt(difficultyChanger)+difficultyChanger);
                             birds.add(rightGrey);
                         }
                         break;
@@ -136,11 +124,11 @@ public class Game extends View {
                         rndBool = r.nextBoolean();
                         if(rndBool == true){
                             PoliceBird leftPolice = new PoliceBird(getContext(),rndBool);
-                            leftPolice.setBirdInfo(-260,r.nextInt(600),r.nextInt(6)+5);
+                            leftPolice.setBirdInfo(-260,r.nextInt(600),r.nextInt(difficultyChanger)+difficultyChanger);
                             birds.add(leftPolice);
                         }else{
                             PoliceBird rightPolice = new PoliceBird(getContext(),rndBool);
-                            rightPolice.setBirdInfo(Resources.getSystem().getDisplayMetrics().widthPixels,r.nextInt(600),r.nextInt(6)+5);
+                            rightPolice.setBirdInfo(Resources.getSystem().getDisplayMetrics().widthPixels,r.nextInt(600),r.nextInt(difficultyChanger)+difficultyChanger);
                             birds.add(rightPolice);
                         }
                         break;
@@ -148,11 +136,11 @@ public class Game extends View {
                         rndBool = r.nextBoolean();
                         if(rndBool == true){
                             Eagle leftEagle = new Eagle(getContext(), rndBool);
-                            leftEagle.setBirdInfo(-260, r.nextInt(600), r.nextInt(6)+5);
+                            leftEagle.setBirdInfo(-260, r.nextInt(600), r.nextInt(difficultyChanger)+difficultyChanger);
                             birds.add(leftEagle);
                         }else{
                             Eagle rightEagle = new Eagle(getContext(), rndBool);
-                            rightEagle.setBirdInfo(Resources.getSystem().getDisplayMetrics().widthPixels, r.nextInt(600), r.nextInt(6)+5);
+                            rightEagle.setBirdInfo(Resources.getSystem().getDisplayMetrics().widthPixels, r.nextInt(600), r.nextInt(difficultyChanger)+difficultyChanger);
                             birds.add(rightEagle);
                         }
                         break;
