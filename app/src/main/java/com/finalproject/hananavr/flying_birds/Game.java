@@ -42,7 +42,7 @@ public class Game extends View {
         difficultyChanger = 5;
 
         //Setting for font style (used for showing the live left as text)
-        fontSize = getResources().getDimensionPixelSize(R.dimen.myFontSize);
+        fontSize = getResources().getDimensionPixelSize(R.dimen.inGameFontSize);
         paint = new Paint();
         paint.setColor(Color.BLACK);
         paint.setTextSize(fontSize);
@@ -197,9 +197,9 @@ public class Game extends View {
                     if (lives == 0){    // Game Over
                         Thread resultThread = new Thread(){
                             public void run(){
-                                Intent backToMainMenu = new Intent(getContext(), Result.class);
-                                backToMainMenu.putExtra("SCORE",score);
-                                getContext().startActivity(backToMainMenu);
+                                Intent resultThread = new Intent(getContext(), Result.class);
+                                resultThread.putExtra("SCORE",score);
+                                getContext().startActivity(resultThread);
                             }
                         };
                         resultThread.start();

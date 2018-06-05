@@ -4,24 +4,51 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
+    Button btnStartGame;
+    Button btnSettings;
+    Button btnHelp;
+    Button btnAbout;
+    Button btnExitGame;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        btnStartGame = findViewById(R.id.btnNewGame);
+        btnSettings = findViewById(R.id.btnSettings);
+        btnHelp = findViewById(R.id.btnHelp);
+        btnAbout = findViewById(R.id.btnAbout);
+        btnExitGame = findViewById(R.id.btnExit);
+
+        btnStartGame.setOnClickListener(this);
+        btnSettings.setOnClickListener(this);
+        btnHelp.setOnClickListener(this);
+        btnAbout.setOnClickListener(this);
+        btnExitGame.setOnClickListener(this);
     }
 
-    public void newGameClick(View view){
-        startActivity(new Intent(getApplicationContext(),NewGame.class));
-    }
-
-    public void aboutClick(View view){
-        startActivity(new Intent(getApplicationContext(),About.class));
-    }
-
-    public void helpClick(View view){
-        startActivity(new Intent(getApplicationContext(),Help.class));
+    @Override
+    public void onClick(View v) {
+        switch(v.getId()){
+            case R.id.btnNewGame:
+                startActivity(new Intent(getApplicationContext(),NewGame.class));
+                break;
+            case R.id.btnSettings:
+                startActivity(new Intent(getApplicationContext(),SettingsActivity.class));
+                break;
+            case R.id.btnHelp:
+                startActivity(new Intent(getApplicationContext(),Help.class));
+                break;
+            case R.id.btnAbout:
+                startActivity(new Intent(getApplicationContext(),About.class));
+                break;
+            case R.id.btnExit:
+                System.exit(0);
+                break;
+        }
     }
 }

@@ -1,4 +1,5 @@
 <resources>
     <dimen name="fab_margin">16dp</dimen>
-    <dimen name="myFontSize">15sp</dimen>
+    <dimen name="inGameFontSize">15sp</dimen>
+    <dimen name="btnFontSize">20sp</dimen>
 </resources>
