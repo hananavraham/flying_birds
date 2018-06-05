@@ -254,8 +254,13 @@ public class Game extends View {
                             bird.currentClicksCounter++;
                             if(bird.requiredClicksToKill == bird.currentClicksCounter){
                                 score += bird.score;
-                                bird.setBirdSpeedY(10);
-                                bird.setBirdSpeedX(10);
+                                if(bird.getBirdSpeedX() < 10){
+                                    bird.setBirdSpeedY(10);
+                                    bird.setBirdSpeedX(10);
+                                }else{
+                                    bird.setBirdSpeedY(bird.getBirdSpeedX());
+                                }
+
                                 bird.setDead(true);
                                 return true;
                             }

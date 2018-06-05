@@ -62,6 +62,10 @@ public class Bird extends View {
         this.birdSpeedX = birdSpeedX;
     }
 
+    public int getBirdSpeedX() {
+        return birdSpeedX;
+    }
+
     public boolean IsDead() { return IsDead; }
 
     public void setDead(boolean dead) { IsDead = dead; }
