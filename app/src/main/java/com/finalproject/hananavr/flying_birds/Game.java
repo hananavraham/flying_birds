@@ -261,7 +261,7 @@ public class Game extends View {
         if (eventAction == MotionEvent.ACTION_DOWN) {
             float x = event.getX();
             float y = event.getY();
-            xTouchPos = x;
+
 
             //Check where the finger pressed to change shooter direction accordingly
             if(x <= Resources.getSystem().getDisplayMetrics().widthPixels/2)
@@ -270,6 +270,7 @@ public class Game extends View {
                 shooterDirection_flg = 0;
 
             if(pause_flg == 0){
+                xTouchPos = x;
                 //Check for every bird if the clicks count are enough to turn the bird dead
                 ListIterator it = birds.listIterator();
                 while (it.hasNext()){

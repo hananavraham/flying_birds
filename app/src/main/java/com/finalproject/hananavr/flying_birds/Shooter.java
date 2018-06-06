@@ -13,6 +13,7 @@ public class Shooter extends View {
     int yPos;
     int draw_flg;
     int motion_flg;
+    int firstTimeFlg;
     float oldTouch;
     Bitmap[] shooterRightMotion;
     Bitmap[] shooterLeftMotion;
@@ -24,6 +25,7 @@ public class Shooter extends View {
         draw_flg = 0;
         oldTouch = 0;
         motion_flg = 0;
+        firstTimeFlg = 0;
         shooterRightMotion = new Bitmap[5];
         shooterLeftMotion = new Bitmap[5];
         initRightImages();
@@ -49,66 +51,63 @@ public class Shooter extends View {
 
     public void draw(Canvas canvas, float xTouchPos) {
         super.draw(canvas);
-//        if(oldTouch != xTouchPos){
+        if(firstTimeFlg == 0){
+            oldTouch = xTouchPos = 10;
+            firstTimeFlg++;
+        }
+
+        if(oldTouch != xTouchPos){
             if (xTouchPos <= Resources.getSystem().getDisplayMetrics().widthPixels / 2) {
                 if (draw_flg >= 0 && draw_flg < 10) {
                     canvas.drawBitmap(shooterLeftMotion[0], this.xPos, this.yPos, null);
-                    //Toast.makeText(this.getContext().getApplicationContext(), "draw flg is: "+String.valueOf(draw_flg) ,Toast.LENGTH_LONG).show();
                     draw_flg++;
                 } else if (draw_flg >= 10 && draw_flg < 20) {
                     canvas.drawBitmap(shooterLeftMotion[1], this.xPos, this.yPos, null);
-                    //Toast.makeText(this.getContext().getApplicationContext(), "2" ,Toast.LENGTH_LONG).show();
                     draw_flg++;
                 } else if (draw_flg >= 20 && draw_flg < 30) {
                     canvas.drawBitmap(shooterLeftMotion[2], this.xPos, this.yPos, null);
-                    //Toast.makeText(this.getContext().getApplicationContext(), "3" ,Toast.LENGTH_LONG).show();
                     draw_flg++;
                 } else if (draw_flg >= 30 && draw_flg < 40) {
                     canvas.drawBitmap(shooterLeftMotion[3], this.xPos, this.yPos, null);
-                    //Toast.makeText(this.getContext().getApplicationContext(), "4" ,Toast.LENGTH_LONG).show();
                     draw_flg++;
                 } else if (draw_flg >= 40 && draw_flg <= 50) {
                     canvas.drawBitmap(shooterLeftMotion[4], this.xPos, this.yPos, null);
-                    //Toast.makeText(this.getContext().getApplicationContext(), "5" ,Toast.LENGTH_LONG).show();
                     draw_flg++;
-                    if (draw_flg > 50)
+                    if (draw_flg > 50){
                         draw_flg = 0;
+                    }
                 }
             } else {
                 if (draw_flg >= 0 && draw_flg < 10) {
                     canvas.drawBitmap(shooterRightMotion[0], this.xPos, this.yPos, null);
-                    //Toast.makeText(this.getContext().getApplicationContext(), "draw flg is: "+String.valueOf(draw_flg) ,Toast.LENGTH_LONG).show();
                     draw_flg++;
                 } else if (draw_flg >= 10 && draw_flg < 20) {
                     canvas.drawBitmap(shooterRightMotion[1], this.xPos, this.yPos, null);
-                    //Toast.makeText(this.getContext().getApplicationContext(), "2" ,Toast.LENGTH_LONG).show();
                     draw_flg++;
                 } else if (draw_flg >= 20 && draw_flg < 30) {
                     canvas.drawBitmap(shooterRightMotion[2], this.xPos, this.yPos, null);
-                    //Toast.makeText(this.getContext().getApplicationContext(), "3" ,Toast.LENGTH_LONG).show();
                     draw_flg++;
                 } else if (draw_flg >= 30 && draw_flg < 40) {
                     canvas.drawBitmap(shooterRightMotion[3], this.xPos, this.yPos, null);
                     draw_flg++;
-                } else if (draw_flg >= 40 && draw_flg < 50) {
+                } else if (draw_flg >= 40 && draw_flg <= 50) {
                     canvas.drawBitmap(shooterRightMotion[4], this.xPos, this.yPos, null);
                     draw_flg++;
-                    if (draw_flg > 50)
+                    if (draw_flg > 50) {
                         draw_flg = 0;
+                    }
                 }
             }
-//        }
+        }
 
-//        if(draw_flg >= 50 ){
-//            oldTouch = xTouchPos;
-//            if (xTouchPos <= Resources.getSystem().getDisplayMetrics().widthPixels / 2){
-//                canvas.drawBitmap(shooterLeftMotion[0], this.xPos, this.yPos, null);
-//                //Toast.makeText(this.getContext().getApplicationContext(), "first if" ,Toast.LENGTH_LONG).show();
-//            }else{
-//                canvas.drawBitmap(shooterRightMotion[0], this.xPos, this.yPos, null);
-//                //Toast.makeText(this.getContext().getApplicationContext(), "second if" ,Toast.LENGTH_LONG).show();
-//            }
-//        }
+        if(draw_flg >= 50 ){
+            oldTouch = xTouchPos;
+            if (xTouchPos <= Resources.getSystem().getDisplayMetrics().widthPixels / 2){
+                canvas.drawBitmap(shooterLeftMotion[0], this.xPos, this.yPos, null);
+            }else{
+                canvas.drawBitmap(shooterRightMotion[0], this.xPos, this.yPos, null);
+            }
+        }
     }
 }
 

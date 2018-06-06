@@ -1,7 +1,12 @@
 package com.finalproject.hananavr.flying_birds;
 
+import android.content.Context;
+import android.media.AudioManager;
+import android.media.MediaPlayer;
+import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
@@ -11,6 +16,7 @@ public class SettingsActivity extends AppCompatActivity {
 
     SeekBar sbVolume;
     CheckBox cbSfx;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,6 +34,7 @@ public class SettingsActivity extends AppCompatActivity {
                     cbSfx.setText("SFX sounds off");
             }
         });
+
     }
 
 }

@@ -1,6 +1,7 @@
 package com.finalproject.hananavr.flying_birds;
 
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -13,17 +14,22 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     Button btnHelp;
     Button btnAbout;
     Button btnExitGame;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        btnStartGame = findViewById(R.id.btnNewGame);
-        btnSettings = findViewById(R.id.btnSettings);
-        btnHelp = findViewById(R.id.btnHelp);
-        btnAbout = findViewById(R.id.btnAbout);
-        btnExitGame = findViewById(R.id.btnExit);
+        btnStartGame = (Button) findViewById(R.id.btnNewGame);
+        btnSettings = (Button) findViewById(R.id.btnSettings);
+        btnHelp = (Button) findViewById(R.id.btnHelp);
+        btnAbout = (Button) findViewById(R.id.btnAbout);
+        btnExitGame = (Button) findViewById(R.id.btnExit);
 
+        setListeners();
+    }
+
+    private void setListeners() {
         btnStartGame.setOnClickListener(this);
         btnSettings.setOnClickListener(this);
         btnHelp.setOnClickListener(this);
