@@ -50,6 +50,10 @@ public class Bird extends View {
 
     public boolean IsRightDirection() { return IsRightDirection; }
 
+    public void setRightDirection(boolean rightDirection) {
+        IsRightDirection = rightDirection;
+    }
+
     public float getX(){ return this.posX; }
 
     public float getY(){ return this.posY; }
