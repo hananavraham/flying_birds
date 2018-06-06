@@ -26,7 +26,9 @@ public class Game extends View {
     Paint paint;
     InGameMenu igm;
     Bitmap heart, inGameMenu, rightShooter, leftShooter;
+    Shooter shooter;
     int pause_flg, lives, fontSize, shooterDirection_flg, score, difficultyChanger;
+    float xTouchPos;
 
     //Variables needed for proper random bird creation logic
     Runnable runnable;
@@ -40,7 +42,9 @@ public class Game extends View {
         shooterDirection_flg = 0;
         score = 0;
         difficultyChanger = 5;
+        xTouchPos = 0;
 
+        shooter = new Shooter(context, Resources.getSystem().getDisplayMetrics().widthPixels/2-90, 280);
         //Setting for font style (used for showing the live left as text)
         fontSize = getResources().getDimensionPixelSize(R.dimen.inGameFontSize);
         paint = new Paint();
@@ -175,10 +179,12 @@ public class Game extends View {
 
         checkBirdPassingScreen();
 
-        if(shooterDirection_flg == 0)
-            canvas.drawBitmap(rightShooter,Resources.getSystem().getDisplayMetrics().widthPixels/2-50,240,null);
-        else
-            canvas.drawBitmap(leftShooter,Resources.getSystem().getDisplayMetrics().widthPixels/2-100,235,null);
+//        if(shooterDirection_flg == 0)
+//            canvas.drawBitmap(rightShooter,Resources.getSystem().getDisplayMetrics().widthPixels/2-50,240,null);
+//        else
+//            canvas.drawBitmap(leftShooter,Resources.getSystem().getDisplayMetrics().widthPixels/2-100,235,null);
+
+        shooter.draw(canvas, xTouchPos);
 
         if(pause_flg == 1){
             igm.draw(canvas);
@@ -236,6 +242,8 @@ public class Game extends View {
         if (eventAction == MotionEvent.ACTION_DOWN) {
             float x = event.getX();
             float y = event.getY();
+            xTouchPos = x;
+
 
             //Check where the finger pressed to change shooter direction accordingly
             if(x <= Resources.getSystem().getDisplayMetrics().widthPixels/2)
