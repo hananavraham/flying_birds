@@ -37,7 +37,7 @@ public class Game extends View {
 
     public Game(Context context) {
         super(context);
-        lives = 50;
+        lives = 5;
         pause_flg = 0;
         shooterDirection_flg = 0;
         score = 0;
@@ -188,11 +188,6 @@ public class Game extends View {
         canvas.drawBitmap(inGameMenu,Resources.getSystem().getDisplayMetrics().widthPixels-100,4,null);
 
         checkBirdPassingScreen();
-
-//        if(shooterDirection_flg == 0)
-//            canvas.drawBitmap(rightShooter,Resources.getSystem().getDisplayMetrics().widthPixels/2-50,240,null);
-//        else
-//            canvas.drawBitmap(leftShooter,Resources.getSystem().getDisplayMetrics().widthPixels/2-100,235,null);
 
         shooter.draw(canvas, xTouchPos);
 
