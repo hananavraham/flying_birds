@@ -27,7 +27,7 @@ public class Game extends View {
     InGameMenu igm;
     Bitmap heart, inGameMenu, rightShooter, leftShooter;
     Shooter shooter;
-    int pause_flg, lives, fontSize, shooterDirection_flg, score, difficultyChanger;
+    int pause_flg, lives, fontSize, shooterDirection_flg, score, difficultyChanger, difficultyChangerFlg;
     float xTouchPos;
 
     //Variables needed for proper random bird creation logic
@@ -42,6 +42,7 @@ public class Game extends View {
         shooterDirection_flg = 0;
         score = 0;
         difficultyChanger = 4;
+        difficultyChangerFlg = 1;
         xTouchPos = 0;
 
         shooter = new Shooter(context, Resources.getSystem().getDisplayMetrics().widthPixels/2-90, 280);
@@ -75,26 +76,37 @@ public class Game extends View {
             public void run() {
                 boolean rndBool;
                 Random r = new Random();
-                if(score > 1000)
+                if(score > 1000 && difficultyChangerFlg == 1){
                     difficultyChanger += 2;
-                if(score > 2000)
+                    difficultyChangerFlg++;
+                } else if(score > 2000 && difficultyChangerFlg == 2){
                     difficultyChanger += 1;
-                if(score > 3000)
+                    difficultyChangerFlg++;
+                }else if(score > 3000 && difficultyChangerFlg == 3){
                     difficultyChanger += 1;
-                if(score > 4000)
+                    difficultyChangerFlg++;
+                }else if(score > 4000 && difficultyChangerFlg == 4){
                     difficultyChanger += 1;
-                if(score > 5000)
+                    difficultyChangerFlg++;
+                }else if(score > 5000 && difficultyChangerFlg == 5){
                     difficultyChanger += 1;
-                if(score > 6000)
+                    difficultyChangerFlg++;
+                }else if(score > 6000 && difficultyChangerFlg == 6){
                     difficultyChanger += 1;
-                if(score > 7000)
+                    difficultyChangerFlg++;
+                }else if(score > 7000 && difficultyChangerFlg == 7){
                     difficultyChanger += 1;
-                if(score > 8000)
+                    difficultyChangerFlg++;
+                }else if(score > 8000 && difficultyChangerFlg == 8){
                     difficultyChanger += 1;
-                if(score > 9000)
+                    difficultyChangerFlg++;
+                }else if(score > 9000 && difficultyChangerFlg == 9){
                     difficultyChanger += 1;
-                if(score > 10000)
+                    difficultyChangerFlg++;
+                }else if(score > 10000 && difficultyChangerFlg == 10){
                     difficultyChanger += 1;
+                    difficultyChangerFlg++;
+                }
 
                 int rndBirdNum = r.nextInt(5)+1;
                 switch (rndBirdNum){
@@ -211,6 +223,7 @@ public class Game extends View {
                     if(lives > 0)
                         lives--;
                     if (lives == 0){    // Game Over
+                        future.cancel(true);
                         Thread resultThread = new Thread(){
                             public void run(){
                                 Intent resultThread = new Intent(getContext(), Result.class);
@@ -230,6 +243,7 @@ public class Game extends View {
                     if(lives > 0)
                         lives--;
                     if (lives == 0){    // Game Over
+                        future.cancel(true);
                         Thread resultThread = new Thread(){
                             public void run(){
                                 Intent resultThread = new Intent(getContext(), Result.class);
@@ -325,6 +339,7 @@ public class Game extends View {
                 }
                 //If back to main menu option is pressed
                 if(x >= 810 && x < (810+igm.getOptionWidth()) && y >= 350 && y < (350+igm.getOptionHeight())){
+                    future.cancel(true);
                     Thread backToMainMenuThread = new Thread(){
                         public void run(){
                             getContext().startActivity(new Intent(getContext(),MainActivity.class));
@@ -335,6 +350,7 @@ public class Game extends View {
                 }
                 //If exit option is pressed
                 if(x >= 810 && x < (810+igm.getOptionWidth()) && y >= 435 && y < (435+igm.getOptionHeight())){
+                    future.cancel(true);
                     Thread exitGameThread = new Thread(){
                         public void run(){
                             System.exit(0);
