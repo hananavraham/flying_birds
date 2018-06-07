@@ -276,7 +276,7 @@ public class Game extends View {
         if(removeFlg > 0){
             //birds.remove(i);
             // returning the bird to the Birds List as new bird...
-            if (birds.size() == 5)
+            if (birds.size() > 5)
                 birds.remove(i);
             else{
                 birds.get(i).setDead(false);
