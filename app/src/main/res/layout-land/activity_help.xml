@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background1"
+    android:background="@drawable/activitiesbackground"
     android:orientation="vertical"
     tools:context=".Help">
 
@@ -16,19 +16,21 @@
         android:layout_marginStart="8dp"
         android:singleLine="false"
         android:text="Instructions : "
-        android:textSize="40dp"
+        android:textColor="@color/helpActivityTextColor"
+        android:textSize="40sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/textView3"
-        android:layout_width="491dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:text="1. Birds flying from the right and left side of the screen."
-        android:textSize="20dp"
+        android:text="1. Birds are flying from the right and left side of the screen."
+        android:textColor="@color/helpActivityTextColor"
+        android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
@@ -39,8 +41,9 @@
         android:layout_marginLeft="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:text="2. Press on the bird to shoot them."
-        android:textSize="20dp"
+        android:text="2. Press on a bird to shoot it."
+        android:textColor="@color/helpActivityTextColor"
+        android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
@@ -51,9 +54,9 @@
         android:layout_marginLeft="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:text="3. If bird succeed to fly the other side of the screen you will lose
-    heart - When you lose your hearts - Game Over..."
-        android:textSize="20dp"
+        android:text="3. If a bird succeeded to fly to the other side of the screen, you will lose a heart.  When you lose all your hearts, Game Over..."
+        android:textColor="@color/helpActivityTextColor"
+        android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView5" />
 
@@ -64,8 +67,9 @@
         android:layout_marginLeft="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:text="4. Birds discription :"
-        android:textSize="20dp"
+        android:text="4. Birds description :"
+        android:textColor="@color/helpActivityTextColor"
+        android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
@@ -78,7 +82,8 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:text="Shoots: 1  Points: 10"
-        android:textSize="11dp"
+        android:textColor="@color/helpActivityTextColor"
+        android:textSize="11sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/view"
         app:layout_constraintStart_toStartOf="parent"
@@ -104,7 +109,8 @@
         android:layout_marginStart="24dp"
         android:layout_marginTop="8dp"
         android:text="Shoots: 2  Points: 20"
-        android:textSize="11dp"
+        android:textColor="@color/helpActivityTextColor"
+        android:textSize="11sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/view"
         app:layout_constraintStart_toEndOf="@+id/textView7"
@@ -130,7 +136,8 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:text="Shoots: 4  Points: 80"
-        android:textSize="11dp"
+        android:textColor="@color/helpActivityTextColor"
+        android:textSize="11sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/view"
         app:layout_constraintStart_toEndOf="@+id/textView9"
@@ -157,7 +164,8 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:text="Shoots: 3  Points: 40"
-        android:textSize="11dp"
+        android:textColor="@color/helpActivityTextColor"
+        android:textSize="11sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/view"
         app:layout_constraintStart_toEndOf="@+id/textView6"
@@ -184,6 +192,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:text="Shoots: 5  Points: 200"
+        android:textColor="@color/helpActivityTextColor"
         android:textSize="11dp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/view"

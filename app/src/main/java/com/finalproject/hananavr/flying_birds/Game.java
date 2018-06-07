@@ -23,6 +23,7 @@ import java.util.concurrent.TimeUnit;
 public class Game extends View {
 
     ArrayList<Bird> birds = new ArrayList<>();
+    Random r;
     Paint paint;
     InGameMenu igm;
     Bitmap heart, inGameMenu, rightShooter, leftShooter;
@@ -40,12 +41,11 @@ public class Game extends View {
      * Initialize all the needed variables and functions for a proper game flow.
      * @param context
      */
-    Random r = new Random();
-
     public Game(Context context) {
         super(context);
 
         //Needed variables for game flow
+        r = new Random();
         lives = 5;
         pause_flg = 0;
         score = 0;
@@ -72,12 +72,7 @@ public class Game extends View {
         //Heart image to show next to the lives left text
         heart = BitmapFactory.decodeResource(getResources(), R.drawable.heart);
 
-        //Pictures of left & right shooter direction for changing shooter direction animation
-        rightShooter = BitmapFactory.decodeResource(getResources(), R.drawable.rightshooter);
-        leftShooter = BitmapFactory.decodeResource(getResources(), R.drawable.leftshooter);
-
         startGame();
-
     }
 
     /**
@@ -124,7 +119,7 @@ public class Game extends View {
                 switch (rndBirdNum){
                     case 1:
                         rndBool = r.nextBoolean();
-                        if(rndBool == true){
+                        if(rndBool){
                             RedBird leftRed = new RedBird(getContext(),rndBool);
                             leftRed.setBirdInfo(-260,r.nextInt(600), difficultyChanger);
                             birds.add(leftRed);
@@ -136,7 +131,7 @@ public class Game extends View {
                         break;
                     case 2:
                         rndBool = r.nextBoolean();
-                        if(rndBool == true){
+                        if(rndBool){
                             YellowBird leftYellow = new YellowBird(getContext(),rndBool);
                             leftYellow.setBirdInfo(-260,r.nextInt(600),difficultyChanger);
                             birds.add(leftYellow);
@@ -148,7 +143,7 @@ public class Game extends View {
                         break;
                     case 3:
                         rndBool = r.nextBoolean();
-                        if(rndBool == true){
+                        if(rndBool){
                             GreyBird leftGrey = new GreyBird(getContext(),rndBool);
                             leftGrey.setBirdInfo(-260,r.nextInt(600), difficultyChanger);
                             birds.add(leftGrey);
@@ -160,7 +155,7 @@ public class Game extends View {
                         break;
                     case 4:
                         rndBool = r.nextBoolean();
-                        if(rndBool == true){
+                        if(rndBool){
                             PoliceBird leftPolice = new PoliceBird(getContext(),rndBool);
                             leftPolice.setBirdInfo(-260,r.nextInt(600),difficultyChanger);
                             birds.add(leftPolice);
@@ -172,7 +167,7 @@ public class Game extends View {
                         break;
                     case 5:
                         rndBool = r.nextBoolean();
-                        if(rndBool == true){
+                        if(rndBool){
                             Eagle leftEagle = new Eagle(getContext(), rndBool);
                             leftEagle.setBirdInfo(-260, r.nextInt(600), difficultyChanger);
                             birds.add(leftEagle);

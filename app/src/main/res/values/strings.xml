@@ -9,4 +9,5 @@
     <string name="exit">Exit Game</string>
     <string name="game_over">GAME OVER</string>
     <string name="try_again">Try Again</string>
+    <string name="sfx">SFX sounds on</string>
 </resources>

@@ -3,8 +3,6 @@ package com.finalproject.hananavr.flying_birds;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.MotionEvent;
-import android.view.View;
 
 public class NewGame extends AppCompatActivity {
 
@@ -17,9 +15,9 @@ public class NewGame extends AppCompatActivity {
 
         final int sdk = android.os.Build.VERSION.SDK_INT;
         if(sdk < android.os.Build.VERSION_CODES.JELLY_BEAN) {
-            game.setBackgroundDrawable(ContextCompat.getDrawable(this, R.drawable.background) );
+            game.setBackgroundDrawable(ContextCompat.getDrawable(this, R.drawable.ingamebackground) );
         } else {
-            game.setBackground(ContextCompat.getDrawable(this, R.drawable.background));
+            game.setBackground(ContextCompat.getDrawable(this, R.drawable.ingamebackground));
         }
         setContentView(game);
     }
