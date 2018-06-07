@@ -50,7 +50,7 @@ public class Result extends AppCompatActivity {
         }
 
         else{
-            highScoreLabel.setText(" Previous High Score is: " + highscore);
+            highScoreLabel.setText("High Score is: " + highscore);
         }
     }
 

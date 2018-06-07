@@ -41,4 +41,16 @@
         app:layout_constraintTop_toBottomOf="@+id/skVolumeControl"
         app:layout_constraintVertical_bias="0.089" />
 
+    <Button
+        android:id="@+id/button3"
+        android:layout_width="35dp"
+        android:layout_height="28dp"
+        android:layout_marginEnd="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/menu_button"
+        android:onClick="mainMenuClick"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
 </android.support.constraint.ConstraintLayout>

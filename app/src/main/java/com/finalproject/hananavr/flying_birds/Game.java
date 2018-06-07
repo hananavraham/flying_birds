@@ -35,6 +35,8 @@ public class Game extends View {
     ScheduledExecutorService service;
     Future<?> future;
 
+    Random r = new Random();
+
     public Game(Context context) {
         super(context);
         lives = 5;
@@ -75,7 +77,7 @@ public class Game extends View {
         runnable = new Runnable() {
             public void run() {
                 boolean rndBool;
-                Random r = new Random();
+
                 if(score > 1000 && difficultyChangerFlg == 1){
                     difficultyChanger += 2;
                     difficultyChangerFlg++;
@@ -259,7 +261,19 @@ public class Game extends View {
             }
         }
         if(removeFlg > 0){
-            birds.remove(i);
+            //birds.remove(i);
+            // returning the bird to the Birds List as new bird...
+            if (birds.size() == 5)
+                birds.remove(i);
+            else{
+                birds.get(i).setDead(false);
+                birds.get(i).setBirdSpeedY(0);
+                birds.get(i).setCurrentClicksCounter(0);
+                if (birds.get(i).IsRightDirection())
+                    birds.get(i).setBirdInfo(-260,r.nextInt(600), difficultyChanger);
+                else
+                    birds.get(i).setBirdInfo(Resources.getSystem().getDisplayMetrics().widthPixels,r.nextInt(600), difficultyChanger);
+            }
         }
     }
 

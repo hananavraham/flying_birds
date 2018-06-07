@@ -1,6 +1,7 @@
 package com.finalproject.hananavr.flying_birds;
 
 import android.content.Context;
+import android.content.Intent;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.provider.MediaStore;
@@ -35,6 +36,10 @@ public class SettingsActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    public void mainMenuClick(View view){
+        startActivity(new Intent(getApplicationContext(),MainActivity.class));
     }
 
 }
