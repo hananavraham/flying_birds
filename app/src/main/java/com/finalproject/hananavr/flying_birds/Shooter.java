@@ -65,7 +65,7 @@ public class Shooter extends View {
                     canvas.drawBitmap(shooterLeftMotion[1], this.xPos+5, this.yPos+75, null);
                     draw_flg++;
                 } else if (draw_flg >= 4 && draw_flg < 8) {
-                    canvas.drawBitmap(shooterLeftMotion[2], this.xPos-20, this.yPos+75, null);
+                    canvas.drawBitmap(shooterLeftMotion[2], this.xPos-15, this.yPos+75, null);
                     draw_flg++;
                 } else if (draw_flg >= 8 && draw_flg < 10) {
                     canvas.drawBitmap(shooterLeftMotion[3], this.xPos+20, this.yPos+75, null);

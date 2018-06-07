@@ -219,7 +219,6 @@ public class Game extends View {
                             }
                         };
                         resultThread.start();
-                        //getContext().startActivity(new Intent(getContext(),Result.class));
                     }
                     removeFlg++;
                     break;
@@ -239,7 +238,6 @@ public class Game extends View {
                             }
                         };
                         resultThread.start();
-                        //getContext().startActivity(new Intent(getContext(),Result.class));
                     }
                     removeFlg++;
                     break;
@@ -282,7 +280,6 @@ public class Game extends View {
                                 }else{
                                     bird.setBirdSpeedY(bird.getBirdSpeedX());
                                 }
-
                                 bird.setDead(true);
                                 return true;
                             }
