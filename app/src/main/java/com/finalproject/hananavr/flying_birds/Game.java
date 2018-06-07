@@ -27,7 +27,7 @@ public class Game extends View {
     InGameMenu igm;
     Bitmap heart, inGameMenu, rightShooter, leftShooter;
     Shooter shooter;
-    int pause_flg, lives, fontSize, shooterDirection_flg, score, difficultyChanger, difficultyChangerFlg;
+    int pause_flg, lives, fontSize, score, difficultyChanger, difficultyChangerFlg;
     float xTouchPos;
 
     //Variables needed for proper random bird creation logic
@@ -35,17 +35,24 @@ public class Game extends View {
     ScheduledExecutorService service;
     Future<?> future;
 
+    /**
+     * Game class constructor.
+     * Initialize all the needed variables and functions for a proper game flow.
+     * @param context
+     */
     public Game(Context context) {
         super(context);
+
+        //Needed variables for game flow
         lives = 5;
         pause_flg = 0;
-        shooterDirection_flg = 0;
         score = 0;
         difficultyChanger = 4;
         difficultyChangerFlg = 1;
         xTouchPos = 0;
 
         shooter = new Shooter(context, Resources.getSystem().getDisplayMetrics().widthPixels/2-90, 280);
+
         //Setting for font style (used for showing the live left as text)
         fontSize = getResources().getDimensionPixelSize(R.dimen.inGameFontSize);
         paint = new Paint();
@@ -71,6 +78,9 @@ public class Game extends View {
 
     }
 
+    /**
+     * Creates a bird every 3 seconds with random values and suitable speed according to the current score.
+     */
     private void startGame() {
         runnable = new Runnable() {
             public void run() {
@@ -209,6 +219,9 @@ public class Game extends View {
         invalidate();
     }
 
+    /**
+     * This function checks whether a bird flew off the screen (On y and x axis)
+     */
     private void checkBirdPassingScreen() {
         int i, removeFlg = 0;
         for(i = 0; i < birds.size(); i++){
@@ -263,18 +276,16 @@ public class Game extends View {
         }
     }
 
+    /**
+     * This function checks every screen touch according to the current game state
+     * @param event
+     * @return true if the touch was handled properly and false if not
+     */
     public boolean onTouchEvent(MotionEvent event) {
         int eventAction = event.getAction();
         if (eventAction == MotionEvent.ACTION_DOWN) {
             float x = event.getX();
             float y = event.getY();
-
-
-            //Check where the finger pressed to change shooter direction accordingly
-            if(x <= Resources.getSystem().getDisplayMetrics().widthPixels/2)
-                shooterDirection_flg = 1;
-            else
-                shooterDirection_flg = 0;
 
             if(pause_flg == 0){
                 xTouchPos = x;
