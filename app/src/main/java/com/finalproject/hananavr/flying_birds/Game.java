@@ -71,7 +71,6 @@ public class Game extends View {
 
         //Heart image to show next to the lives left text
         heart = BitmapFactory.decodeResource(getResources(), R.drawable.heart);
-
         startGame();
     }
 
@@ -87,31 +86,31 @@ public class Game extends View {
                     difficultyChanger += 2;
                     difficultyChangerFlg++;
                 } else if(score > 2000 && difficultyChangerFlg == 2){
-                    difficultyChanger += 1;
+                    difficultyChanger += 2;
                     difficultyChangerFlg++;
                 }else if(score > 3000 && difficultyChangerFlg == 3){
-                    difficultyChanger += 1;
+                    difficultyChanger += 2;
                     difficultyChangerFlg++;
                 }else if(score > 4000 && difficultyChangerFlg == 4){
-                    difficultyChanger += 1;
+                    difficultyChanger += 2;
                     difficultyChangerFlg++;
                 }else if(score > 5000 && difficultyChangerFlg == 5){
-                    difficultyChanger += 1;
+                    difficultyChanger += 2;
                     difficultyChangerFlg++;
                 }else if(score > 6000 && difficultyChangerFlg == 6){
-                    difficultyChanger += 1;
+                    difficultyChanger += 2;
                     difficultyChangerFlg++;
                 }else if(score > 7000 && difficultyChangerFlg == 7){
-                    difficultyChanger += 1;
+                    difficultyChanger += 2;
                     difficultyChangerFlg++;
                 }else if(score > 8000 && difficultyChangerFlg == 8){
-                    difficultyChanger += 1;
+                    difficultyChanger += 2;
                     difficultyChangerFlg++;
                 }else if(score > 9000 && difficultyChangerFlg == 9){
-                    difficultyChanger += 1;
+                    difficultyChanger += 2;
                     difficultyChangerFlg++;
                 }else if(score > 10000 && difficultyChangerFlg == 10){
-                    difficultyChanger += 1;
+                    difficultyChanger += 2;
                     difficultyChangerFlg++;
                 }
 
@@ -271,7 +270,7 @@ public class Game extends View {
         if(removeFlg > 0){
             //birds.remove(i);
             // returning the bird to the Birds List as new bird...
-            if (birds.size() > 5)
+            if (birds.size() > 6)
                 birds.remove(i);
             else{
                 birds.get(i).setDead(false);
