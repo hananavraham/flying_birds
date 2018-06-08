@@ -55,7 +55,7 @@ public class Game extends View {
 
         shooter = new Shooter(context, Resources.getSystem().getDisplayMetrics().widthPixels/2-90, 440);
 
-        //Setting for font style (used for showing the live left as text)
+        //Setting in game fonts style
         fontSize = getResources().getDimensionPixelSize(R.dimen.inGameFontSize);
         paint = new Paint();
         paint.setColor(Color.BLACK);
