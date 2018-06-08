@@ -59,19 +59,19 @@ public class Shooter extends View {
         if(oldTouch != xTouchPos){
             if (xTouchPos <= Resources.getSystem().getDisplayMetrics().widthPixels / 2) {
                 if (draw_flg >= 0 && draw_flg < 2) {
-                    canvas.drawBitmap(shooterLeftMotion[0], this.xPos+10, this.yPos+75, null);
+                    canvas.drawBitmap(shooterLeftMotion[0], this.xPos+10, this.yPos, null);
                     draw_flg++;
                 } else if (draw_flg >= 2 && draw_flg < 4) {
-                    canvas.drawBitmap(shooterLeftMotion[1], this.xPos+5, this.yPos+75, null);
+                    canvas.drawBitmap(shooterLeftMotion[1], this.xPos+5, this.yPos, null);
                     draw_flg++;
                 } else if (draw_flg >= 4 && draw_flg < 8) {
-                    canvas.drawBitmap(shooterLeftMotion[2], this.xPos-15, this.yPos+75, null);
+                    canvas.drawBitmap(shooterLeftMotion[2], this.xPos-15, this.yPos, null);
                     draw_flg++;
                 } else if (draw_flg >= 8 && draw_flg < 10) {
-                    canvas.drawBitmap(shooterLeftMotion[3], this.xPos+20, this.yPos+75, null);
+                    canvas.drawBitmap(shooterLeftMotion[3], this.xPos+20, this.yPos, null);
                     draw_flg++;
                 } else if (draw_flg >= 10 && draw_flg <= 12) {
-                    canvas.drawBitmap(shooterLeftMotion[4], this.xPos+30, this.yPos+75, null);
+                    canvas.drawBitmap(shooterLeftMotion[4], this.xPos+30, this.yPos, null);
                     draw_flg++;
                     if (draw_flg > 12){
                         draw_flg = 0;
@@ -79,19 +79,19 @@ public class Shooter extends View {
                 }
             } else {
                 if (draw_flg >= 0 && draw_flg < 2) {
-                    canvas.drawBitmap(shooterRightMotion[0], this.xPos+20, this.yPos+75, null);
+                    canvas.drawBitmap(shooterRightMotion[0], this.xPos+20, this.yPos, null);
                     draw_flg++;
                 } else if (draw_flg >= 2 && draw_flg < 4) {
-                    canvas.drawBitmap(shooterRightMotion[1], this.xPos+20, this.yPos+75, null);
+                    canvas.drawBitmap(shooterRightMotion[1], this.xPos+20, this.yPos, null);
                     draw_flg++;
                 } else if (draw_flg >= 4 && draw_flg < 8) {
-                    canvas.drawBitmap(shooterRightMotion[2], this.xPos+20, this.yPos+75, null);
+                    canvas.drawBitmap(shooterRightMotion[2], this.xPos+20, this.yPos, null);
                     draw_flg++;
                 } else if (draw_flg >= 8 && draw_flg < 10) {
-                    canvas.drawBitmap(shooterRightMotion[3], this.xPos+20, this.yPos+75, null);
+                    canvas.drawBitmap(shooterRightMotion[3], this.xPos+20, this.yPos, null);
                     draw_flg++;
                 } else if (draw_flg >= 10 && draw_flg <= 12) {
-                    canvas.drawBitmap(shooterRightMotion[4], this.xPos+20, this.yPos+75, null);
+                    canvas.drawBitmap(shooterRightMotion[4], this.xPos+20, this.yPos, null);
                     draw_flg++;
                     if (draw_flg > 12) {
                         draw_flg = 0;
@@ -103,9 +103,9 @@ public class Shooter extends View {
         if(draw_flg >= 12){
             oldTouch = xTouchPos;
             if (xTouchPos <= Resources.getSystem().getDisplayMetrics().widthPixels / 2){
-                canvas.drawBitmap(shooterLeftMotion[0], this.xPos+10, this.yPos+75, null);
+                canvas.drawBitmap(shooterLeftMotion[0], this.xPos+10, this.yPos, null);
             }else{
-                canvas.drawBitmap(shooterRightMotion[0], this.xPos+20, this.yPos+75, null);
+                canvas.drawBitmap(shooterRightMotion[0], this.xPos+20, this.yPos, null);
             }
         }
     }

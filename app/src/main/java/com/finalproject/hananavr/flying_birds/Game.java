@@ -53,7 +53,7 @@ public class Game extends View {
         difficultyChangerFlg = 1;
         xTouchPos = 0;
 
-        shooter = new Shooter(context, Resources.getSystem().getDisplayMetrics().widthPixels/2-90, 280);
+        shooter = new Shooter(context, Resources.getSystem().getDisplayMetrics().widthPixels/2-90, 440);
 
         //Setting for font style (used for showing the live left as text)
         fontSize = getResources().getDimensionPixelSize(R.dimen.inGameFontSize);
@@ -270,7 +270,7 @@ public class Game extends View {
         if(removeFlg > 0){
             //birds.remove(i);
             // returning the bird to the Birds List as new bird...
-            if (birds.size() > 6)
+            if (birds.size() > 4)
                 birds.remove(i);
             else{
                 birds.get(i).setDead(false);
