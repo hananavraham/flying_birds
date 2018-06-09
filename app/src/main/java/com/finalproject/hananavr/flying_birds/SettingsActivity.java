@@ -14,10 +14,10 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.SeekBar;
 
-public class SettingsActivity extends AppCompatActivity {
+public class SettingsActivity extends AppCompatActivity implements CheckBox.OnCheckedChangeListener {
 
-    SeekBar sbVolume;
-    CheckBox cbSfx;
+    private SeekBar sbVolume;
+    private CheckBox cbSfx;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,23 +25,20 @@ public class SettingsActivity extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_settings);
 
-        sbVolume = findViewById(R.id.skVolumeControl);
         cbSfx = findViewById(R.id.cbSfxSounds);
-
-        cbSfx.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if(isChecked)
-                    cbSfx.setText("SFX sounds on");
-                else
-                    cbSfx.setText("SFX sounds off");
-            }
-        });
-
+//        cbSfx.setOnCheckedChangeListener(this);
+        sbVolume = findViewById(R.id.skVolumeControl);
     }
 
     public void mainMenuClick(View view){
         startActivity(new Intent(getApplicationContext(),MainActivity.class));
     }
 
+    @Override
+    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+        if(isChecked)
+            cbSfx.setText("SFX sounds on");
+        else
+            cbSfx.setText("SFX sounds off");
+    }
 }

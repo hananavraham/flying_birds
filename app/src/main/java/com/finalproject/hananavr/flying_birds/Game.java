@@ -10,7 +10,6 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.view.MotionEvent;
 import android.view.View;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.ListIterator;
@@ -188,6 +187,7 @@ public class Game extends View {
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
 
+        //Cause concurrent modification exception sometimes..
         ListIterator it = birds.listIterator();
         while (it.hasNext()){
             Bird bird = (Bird) it.next();
@@ -296,6 +296,24 @@ public class Game extends View {
             float y = event.getY();
 
             if(pause_flg == 0){
+                //Check if in game menu icon is pressed
+                if(x >= Resources.getSystem().getDisplayMetrics().widthPixels-100 && x < (Resources.getSystem().getDisplayMetrics().widthPixels-100+inGameMenu.getWidth()) && y >= 4 && y < (4+inGameMenu.getHeight())){
+                    pause_flg = 1;
+                    future.cancel(true);
+                    Thread pausedStateThread = new Thread(){
+                        public void run(){
+                            ListIterator it = birds.listIterator();
+                            while(it.hasNext()){
+                                Bird bird = (Bird) it.next();
+                                bird.pausedState();
+                            }
+                        }
+                    };
+                    pausedStateThread.start();
+                    return true;
+                }
+
+                NewGame.arrowShoot.start();
                 xTouchPos = x;
                 //Check for every bird if the clicks count are enough to turn the bird dead
                 ListIterator it = birds.listIterator();
@@ -314,27 +332,11 @@ public class Game extends View {
                                     bird.setBirdSpeedY(bird.getBirdSpeedX());
                                 }
                                 bird.setDead(true);
+                                NewGame.deadBird.start();
                                 return true;
                             }
                         }
                     }
-                }
-
-                //Check if in game menu icon is pressed
-                if(x >= Resources.getSystem().getDisplayMetrics().widthPixels-100 && x < (Resources.getSystem().getDisplayMetrics().widthPixels-100+inGameMenu.getWidth()) && y >= 4 && y < (4+inGameMenu.getHeight())){
-                    pause_flg = 1;
-                    future.cancel(true);
-                    Thread pausedStateThread = new Thread(){
-                        public void run(){
-                            ListIterator it = birds.listIterator();
-                            while(it.hasNext()){
-                                Bird bird = (Bird) it.next();
-                                bird.pausedState();
-                            }
-                        }
-                    };
-                    pausedStateThread.start();
-                    return true;
                 }
             }
 
@@ -361,6 +363,7 @@ public class Game extends View {
                     future.cancel(true);
                     Thread backToMainMenuThread = new Thread(){
                         public void run(){
+                            NewGame.inGameBackgroundMusic.release();
                             getContext().startActivity(new Intent(getContext(),MainActivity.class));
                         }
                     };
@@ -372,6 +375,7 @@ public class Game extends View {
                     future.cancel(true);
                     Thread exitGameThread = new Thread(){
                         public void run(){
+                            NewGame.inGameBackgroundMusic.release();
                             System.exit(0);
                         }
                     };

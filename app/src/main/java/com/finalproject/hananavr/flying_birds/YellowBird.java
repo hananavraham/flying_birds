@@ -21,5 +21,5 @@ public class YellowBird extends Bird {
         super.score = 20;
         super.requiredClicksToKill = 2;
     }
-
+    
 }
