@@ -57,10 +57,12 @@ public class Result extends AppCompatActivity {
     }
 
     public void tryAgain(View view){
+        NewGame.inGameBackgroundMusic.release();
         startActivity(new Intent(getApplicationContext(),NewGame.class));
     }
 
     public void mainMenuClick(View view){
+        NewGame.inGameBackgroundMusic.release();
         startActivity(new Intent(getApplicationContext(),MainActivity.class));
     }
 }
