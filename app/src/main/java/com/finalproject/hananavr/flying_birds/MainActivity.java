@@ -8,31 +8,40 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+import java.io.IOException;
 
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+    static MediaPlayer appBgMusic;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_main);
+
+            appBgMusic = MediaPlayer.create(getApplicationContext(), R.raw.buttonclick);
     }
 
     @Override
     public void onClick(View v) {
         switch(v.getId()){
             case R.id.btnNewGame:
+                appBgMusic.start();
                 startActivity(new Intent(getApplicationContext(),NewGame.class));
                 break;
             case R.id.btnSettings:
-                startActivity(new Intent(getApplicationContext(),SettingsActivity.class));
+                appBgMusic.start();
+                startActivity(new Intent(getApplicationContext(),Settings.class));
                 break;
             case R.id.btnHelp:
+                appBgMusic.start();
                 startActivity(new Intent(getApplicationContext(),Help.class));
                 break;
             case R.id.btnAbout:
+                appBgMusic.start();
                 startActivity(new Intent(getApplicationContext(),About.class));
                 break;
             case R.id.btnExit:
+                appBgMusic.start();
                 System.exit(0);
                 break;
         }

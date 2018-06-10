@@ -41,4 +41,16 @@ public class NewGame extends AppCompatActivity implements MediaPlayer.OnPrepared
     public void onPrepared(MediaPlayer mp) {
         inGameBackgroundMusic.start();
     }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        inGameBackgroundMusic.pause();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        inGameBackgroundMusic.start();
+    }
 }

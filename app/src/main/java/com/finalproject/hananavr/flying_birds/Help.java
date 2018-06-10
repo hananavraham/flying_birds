@@ -16,6 +16,7 @@ public class Help extends AppCompatActivity {
     }
 
     public void mainMenuClick(View view){
+        MainActivity.appBgMusic.start();
         startActivity(new Intent(getApplicationContext(),MainActivity.class));
     }
 }
