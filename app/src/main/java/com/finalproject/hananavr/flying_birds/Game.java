@@ -10,6 +10,7 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.ListIterator;
@@ -28,7 +29,7 @@ public class Game extends View {
     Bitmap heart, inGameMenu, rightShooter, leftShooter;
     Shooter shooter;
     Settings settings;
-    int pause_flg, lives, fontSize, score, difficultyChanger, difficultyChangerFlg;
+    int pause_flg, lives, fontSize, score, difficultyChanger, difficultyChangerFlg, soundsToogle;
     float xTouchPos;
 
     //Variables needed for proper random bird creation logic
@@ -52,6 +53,7 @@ public class Game extends View {
         difficultyChanger = 4;
         difficultyChangerFlg = 1;
         xTouchPos = 0;
+        soundsToogle = 0;
 
         settings = new Settings();
         shooter = new Shooter(context, Resources.getSystem().getDisplayMetrics().widthPixels/2-90, 440);
@@ -68,7 +70,9 @@ public class Game extends View {
         Bitmap igmResume = BitmapFactory.decodeResource(getResources(), R.drawable.resumeoption);
         Bitmap igmRestart = BitmapFactory.decodeResource(getResources(), R.drawable.restartoption);
         Bitmap igmMainMenu = BitmapFactory.decodeResource(getResources(), R.drawable.mainmenuoption);
-        igm = new InGameMenu(context,igmBackground,igmResume,igmRestart,igmMainMenu);
+        Bitmap soundsOn = BitmapFactory.decodeResource(getResources(), R.drawable.soundson);
+        Bitmap soundsOff = BitmapFactory.decodeResource(getResources(), R.drawable.soundsoff);
+        igm = new InGameMenu(context,igmBackground,igmResume,igmRestart,igmMainMenu, soundsOn, soundsOff);
 
         //Heart image to show next to the lives left text
         heart = BitmapFactory.decodeResource(getResources(), R.drawable.heart);
@@ -212,7 +216,7 @@ public class Game extends View {
         shooter.draw(canvas, xTouchPos);
 
         if(pause_flg == 1){
-            igm.draw(canvas);
+            igm.draw(canvas,soundsToogle);
         }
         invalidate();
     }
@@ -314,7 +318,7 @@ public class Game extends View {
                     pausedStateThread.start();
                     return true;
                 }
-                if( settings.IsSFX())
+                if(soundsToogle == 0)
                     NewGame.arrowShoot.start();
                 xTouchPos = x;
                 //Check for every bird if the clicks count are enough to turn the bird dead
@@ -334,7 +338,7 @@ public class Game extends View {
                                     bird.setBirdSpeedY(bird.getBirdSpeedX());
                                 }
                                 bird.setDead(true);
-                                if (settings.IsSFX())
+                                if(soundsToogle == 0)
                                     NewGame.deadBird.start();
                                 return true;
                             }
@@ -346,7 +350,7 @@ public class Game extends View {
             //If the in game menu is open, only checks this code section
             if(pause_flg == 1){
                 //If resume option is pressed
-                if(x >= 810 && x < (810+igm.getOptionWidth()) && y >= 265 && y < (265+igm.getOptionHeight()))
+                if(x >= 820 && x < (820+igm.getOptionWidth()) && y >= 270 && y < (270+igm.getOptionHeight()))
                 {
                     future = service.scheduleAtFixedRate(runnable, 2, 3, TimeUnit.SECONDS);
                     Thread runningStateThread = new Thread(){
@@ -362,7 +366,7 @@ public class Game extends View {
                     pause_flg = 0;
                 }
                 //If restart option is pressed
-                if(x >= 810 && x < (810+igm.getOptionWidth()) && y >= 350 && y < (350+igm.getOptionHeight())){
+                if(x >= 820 && x < (820+igm.getOptionWidth()) && y >= 370 && y < (370+igm.getOptionHeight())){
                     future.cancel(true);
                     Thread restartGameThread = new Thread(){
                         public void run(){
@@ -375,7 +379,7 @@ public class Game extends View {
 
                 }
                 //If main menu option is pressed
-                if(x >= 810 && x < (810+igm.getOptionWidth()) && y >= 435 && y < (435+igm.getOptionHeight())){
+                if(x >= 820 && x < (820+igm.getOptionWidth()) && y >= 470 && y < (470+igm.getOptionHeight())){
                     future.cancel(true);
                     Thread backToMainMenuThread = new Thread(){
                         public void run(){
@@ -385,6 +389,21 @@ public class Game extends View {
                     };
                     backToMainMenuThread.start();
                     return true;
+                }
+                //If toogle button is pressed
+                if(x >= 820 && x < (820+igm.getOptionWidth()) && y >= 575 && y < (575+igm.getOptionHeight())){
+                    //soundsToogle = 0 when sounds On or 1 when sounds OFF
+                    if(soundsToogle == 0){
+                        NewGame.inGameBackgroundMusic.pause();
+                        soundsToogle = 1;
+                        return true;
+                    }
+                    if(soundsToogle == 1){
+                        NewGame.inGameBackgroundMusic.start();
+                        soundsToogle = 0;
+                        return true;
+                    }
+                    return false;
                 }
             }
         }
