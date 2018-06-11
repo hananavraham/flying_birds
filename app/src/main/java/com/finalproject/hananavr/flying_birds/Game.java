@@ -63,10 +63,10 @@ public class Game extends View {
         //All the necessery resources for in game menu
         inGameMenu = BitmapFactory.decodeResource(getResources(), R.drawable.menu_button);
         Bitmap igmBackground = BitmapFactory.decodeResource(getResources(), R.drawable.igmbackground);
-        Bitmap igmResume = BitmapFactory.decodeResource(getResources(), R.drawable.resumegameoption);
+        Bitmap igmResume = BitmapFactory.decodeResource(getResources(), R.drawable.resumeoption);
+        Bitmap igmRestart = BitmapFactory.decodeResource(getResources(), R.drawable.restartoption);
         Bitmap igmMainMenu = BitmapFactory.decodeResource(getResources(), R.drawable.mainmenuoption);
-        Bitmap igmExit = BitmapFactory.decodeResource(getResources(), R.drawable.exitgameoption);
-        igm = new InGameMenu(context,igmBackground,igmResume,igmMainMenu,igmExit);
+        igm = new InGameMenu(context,igmBackground,igmResume,igmRestart,igmMainMenu);
 
         //Heart image to show next to the lives left text
         heart = BitmapFactory.decodeResource(getResources(), R.drawable.heart);
@@ -358,8 +358,21 @@ public class Game extends View {
                     runningStateThread.start();
                     pause_flg = 0;
                 }
-                //If back to main menu option is pressed
+                //If restart option is pressed
                 if(x >= 810 && x < (810+igm.getOptionWidth()) && y >= 350 && y < (350+igm.getOptionHeight())){
+                    future.cancel(true);
+                    Thread restartGameThread = new Thread(){
+                        public void run(){
+                            NewGame.inGameBackgroundMusic.release();
+                            getContext().startActivity(new Intent(getContext(),NewGame.class));
+                        }
+                    };
+                    restartGameThread.start();
+                    return true;
+
+                }
+                //If main menu option is pressed
+                if(x >= 810 && x < (810+igm.getOptionWidth()) && y >= 435 && y < (435+igm.getOptionHeight())){
                     future.cancel(true);
                     Thread backToMainMenuThread = new Thread(){
                         public void run(){
@@ -368,18 +381,6 @@ public class Game extends View {
                         }
                     };
                     backToMainMenuThread.start();
-                    return true;
-                }
-                //If exit option is pressed
-                if(x >= 810 && x < (810+igm.getOptionWidth()) && y >= 435 && y < (435+igm.getOptionHeight())){
-                    future.cancel(true);
-                    Thread exitGameThread = new Thread(){
-                        public void run(){
-                            NewGame.inGameBackgroundMusic.release();
-                            System.exit(0);
-                        }
-                    };
-                    exitGameThread.start();
                     return true;
                 }
             }

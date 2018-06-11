@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Flying_Birds</string>
+    <string name="app_name">The Hunter</string>
     <string name="title_activity_game1">game1</string>
     <string name="title_activity_game">Game</string>
     <string name="new_game">New Game</string>
@@ -10,4 +10,8 @@
     <string name="game_over">GAME OVER</string>
     <string name="try_again">Try Again</string>
     <string name="sfx">SFX sounds on</string>
+    <string name="version">Version 1.0</string>
+    <string name="creators">This game is created by Matan Nabatian, Hanan Avraham and Leon Benjamin.</string>
+    <string name="course">Developed in the Introduction to Mobile Computing Course, 2018. Instructors: Dr. Amnon Dekel and Amir Uval.</string>
+    <string name="college">© 2018 - The Dept. of Software Engineering, Shenkar: Engineering. Design. Art. </string>
 </resources>

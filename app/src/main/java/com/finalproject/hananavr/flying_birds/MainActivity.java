@@ -40,10 +40,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 appBgMusic.start();
                 startActivity(new Intent(getApplicationContext(),About.class));
                 break;
-            case R.id.btnExit:
-                appBgMusic.start();
-                System.exit(0);
-                break;
         }
     }
 }

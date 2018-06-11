@@ -1,5 +1,6 @@
 package com.finalproject.hananavr.flying_birds;
 
+import android.content.Intent;
 import android.media.MediaPlayer;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -45,8 +46,10 @@ public class NewGame extends AppCompatActivity implements MediaPlayer.OnPrepared
     @Override
     protected void onPause() {
         super.onPause();
-        inGameBackgroundMusic.pause();
+        //Need to check how to pause music when game is paused...right now this crashes the game
+       // inGameBackgroundMusic.pause();
     }
+
 
     @Override
     protected void onResume() {
