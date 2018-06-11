@@ -2,6 +2,7 @@ package com.finalproject.hananavr.flying_birds;
 
 import android.content.Context;
 import android.content.Intent;
+import android.media.AudioManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -14,6 +15,7 @@ public class Settings extends AppCompatActivity implements CheckBox.OnCheckedCha
 
     CheckBox cbSfx;
     SeekBar skVolume;
+    AudioManager audioManager;
     private int volume;
     private boolean IsSFX;
 
@@ -26,8 +28,10 @@ public class Settings extends AppCompatActivity implements CheckBox.OnCheckedCha
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
         skVolume = findViewById(R.id.skVolume);
-        skVolume.setMax(100);
-        skVolume.setProgress(volume);
+        audioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
+        skVolume.setMax(audioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC));
+        skVolume.setProgress(audioManager.getStreamVolume(AudioManager.STREAM_MUSIC));
+
         skVolume.setOnSeekBarChangeListener(this);
         cbSfx = findViewById(R.id.cbSfx);
         cbSfx.setOnCheckedChangeListener(this);
@@ -60,7 +64,7 @@ public class Settings extends AppCompatActivity implements CheckBox.OnCheckedCha
 
     @Override
     public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-        volume = progress;
+        audioManager.setStreamVolume(AudioManager.STREAM_MUSIC, progress, 0);
     }
 
     @Override
