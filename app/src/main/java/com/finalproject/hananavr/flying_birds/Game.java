@@ -27,6 +27,7 @@ public class Game extends View {
     InGameMenu igm;
     Bitmap heart, inGameMenu, rightShooter, leftShooter;
     Shooter shooter;
+    Settings settings;
     int pause_flg, lives, fontSize, score, difficultyChanger, difficultyChangerFlg;
     float xTouchPos;
 
@@ -52,6 +53,7 @@ public class Game extends View {
         difficultyChangerFlg = 1;
         xTouchPos = 0;
 
+        settings = new Settings();
         shooter = new Shooter(context, Resources.getSystem().getDisplayMetrics().widthPixels/2-90, 440);
 
         //Setting in game fonts style
@@ -312,8 +314,8 @@ public class Game extends View {
                     pausedStateThread.start();
                     return true;
                 }
-
-                NewGame.arrowShoot.start();
+                if( settings.IsSFX())
+                    NewGame.arrowShoot.start();
                 xTouchPos = x;
                 //Check for every bird if the clicks count are enough to turn the bird dead
                 ListIterator it = birds.listIterator();
@@ -332,7 +334,8 @@ public class Game extends View {
                                     bird.setBirdSpeedY(bird.getBirdSpeedX());
                                 }
                                 bird.setDead(true);
-                                NewGame.deadBird.start();
+                                if (settings.IsSFX())
+                                    NewGame.deadBird.start();
                                 return true;
                             }
                         }

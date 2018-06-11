@@ -10,6 +10,7 @@ import android.view.WindowManager;
 public class NewGame extends AppCompatActivity implements MediaPlayer.OnPreparedListener {
 
     Game game;
+    Settings settings;
     static MediaPlayer inGameBackgroundMusic;
     static MediaPlayer arrowShoot;
     static MediaPlayer deadBird;
@@ -20,10 +21,13 @@ public class NewGame extends AppCompatActivity implements MediaPlayer.OnPrepared
         super.onCreate(savedInstanceState);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         game = new Game(this);
-
+        settings = new Settings();
         inGameBackgroundMusic = MediaPlayer.create(getApplicationContext(),R.raw.ingamebgsound);
         inGameBackgroundMusic.setLooping(true);
         inGameBackgroundMusic.setOnPreparedListener(this);
+
+        inGameBackgroundMusic.setVolume(settings.getVolume(),settings.getVolume());
+
         arrowShoot = MediaPlayer.create(getApplicationContext(),R.raw.shootingarrow);
         deadBird = MediaPlayer.create(getApplicationContext(),R.raw.deadbird);
         deadBird.setVolume(100,100);
