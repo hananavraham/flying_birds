@@ -30,10 +30,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 appBgMusic.start();
                 startActivity(new Intent(getApplicationContext(),NewGame.class));
                 break;
-            case R.id.btnSettings:
-                appBgMusic.start();
-                startActivity(new Intent(getApplicationContext(),Settings.class));
-                break;
             case R.id.btnHelp:
                 appBgMusic.start();
                 startActivity(new Intent(getApplicationContext(),Help.class));

@@ -29,9 +29,6 @@
         <activity
             android:name=".NewGame"
             android:screenOrientation="landscape" />
-        <activity
-            android:name=".Settings"
-            android:screenOrientation="landscape"/>
 
 
     </application>

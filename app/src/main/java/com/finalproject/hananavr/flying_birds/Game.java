@@ -27,7 +27,6 @@ public class Game extends View {
     InGameMenu igm;
     Bitmap heart, inGameMenu, rightShooter, leftShooter;
     Shooter shooter;
-    Settings settings;
     int pause_flg, lives, fontSize, score, difficultyChanger, difficultyChangerFlg, soundsToogle, whiteBirdClicksToKill;
     float xTouchPos;
 
@@ -55,7 +54,6 @@ public class Game extends View {
         soundsToogle = 0;
         whiteBirdClicksToKill = 8;
 
-        settings = new Settings();
         shooter = new Shooter(context, Resources.getSystem().getDisplayMetrics().widthPixels/2-90, 440);
 
         //Setting in game fonts style
@@ -211,10 +209,10 @@ public class Game extends View {
         canvas.drawText(String.valueOf(lives),10,fontSize, paint);
 
         //Drawing heart image
-        canvas.drawBitmap(heart,35,4,null);
+        canvas.drawBitmap(heart,65,4,null);
 
         //Drawing current score as text
-        canvas.drawText("Score: "+String.valueOf(score),95,fontSize, paint);
+        canvas.drawText("Score: "+String.valueOf(score),125,fontSize, paint);
 
         //Drawing in game menu image
         canvas.drawBitmap(inGameMenu,Resources.getSystem().getDisplayMetrics().widthPixels-100,4,null);
