@@ -10,7 +10,7 @@
     tools:context=".About">
 
     <TextView
-        android:id="@+id/tvAppName"
+        android:id="@+id/tvIntroduction"
         android:layout_width="247dp"
         android:layout_height="55dp"
         android:layout_marginEnd="8dp"
@@ -48,7 +48,7 @@
         app:layout_constraintVertical_bias="0.692" />
 
     <TextView
-        android:id="@+id/tvAppCreators"
+        android:id="@+id/tvInfo1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
@@ -62,7 +62,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvAppName" />
+        app:layout_constraintTop_toBottomOf="@+id/tvIntroduction" />
 
     <TextView
         android:id="@+id/tvAppCourse"
@@ -78,7 +78,7 @@
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvAppCreators" />
+        app:layout_constraintTop_toBottomOf="@+id/tvInfo1" />
 
     <TextView
         android:id="@+id/tvAppCollege"
