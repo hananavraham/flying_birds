@@ -8,34 +8,35 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
-import android.widget.Button;
 
-import java.io.IOException;
-
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
-    static MediaPlayer appBgMusic;
+public class MainActivity extends AppCompatActivity implements View.OnClickListener, MediaPlayer.OnPreparedListener {
+    static MediaPlayer gameBtnSfxSound;
+    static MediaPlayer gameMenuBgMusic;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_main);
 
-            appBgMusic = MediaPlayer.create(getApplicationContext(), R.raw.buttonclick);
+        gameBtnSfxSound = MediaPlayer.create(getApplicationContext(), R.raw.buttonclick);
+        gameMenuBgMusic = MediaPlayer.create(getApplicationContext(), R.raw.ingamebgsound);
+        gameMenuBgMusic.setLooping(true);
+        gameMenuBgMusic.setOnPreparedListener(this);
     }
 
     @Override
     public void onClick(View v) {
         switch(v.getId()){
             case R.id.btnNewGame:
-                appBgMusic.start();
+                gameBtnSfxSound.start();
                 startActivity(new Intent(getApplicationContext(),NewGame.class));
                 break;
             case R.id.btnHelp:
-                appBgMusic.start();
+                gameBtnSfxSound.start();
                 startActivity(new Intent(getApplicationContext(),Help.class));
                 break;
             case R.id.btnAbout:
-                appBgMusic.start();
+                gameBtnSfxSound.start();
                 startActivity(new Intent(getApplicationContext(),About.class));
                 break;
         }
@@ -44,7 +45,23 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
        this.finishAffinity();
+    }
+
+    @Override
+    public void onPrepared(MediaPlayer mp) {
+        gameMenuBgMusic.start();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        gameMenuBgMusic.pause();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        gameMenuBgMusic.start();
     }
 }

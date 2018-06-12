@@ -20,7 +20,7 @@ public class NewGame extends AppCompatActivity implements MediaPlayer.OnPrepared
         super.onCreate(savedInstanceState);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         game = new Game(this);
-        inGameBackgroundMusic = MediaPlayer.create(getApplicationContext(),R.raw.ingamebgsound);
+        inGameBackgroundMusic = MediaPlayer.create(getApplicationContext(),R.raw.gamemusic);
         inGameBackgroundMusic.setLooping(true);
         inGameBackgroundMusic.setOnPreparedListener(this);
 
@@ -59,7 +59,8 @@ public class NewGame extends AppCompatActivity implements MediaPlayer.OnPrepared
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
+        //super.onBackPressed();
         inGameBackgroundMusic.stop();
+        startActivity(new Intent(getApplicationContext(),MainActivity.class));
     }
 }

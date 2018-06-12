@@ -30,7 +30,6 @@
             android:name=".NewGame"
             android:screenOrientation="landscape" />
 
-
     </application>
 
 </manifest>

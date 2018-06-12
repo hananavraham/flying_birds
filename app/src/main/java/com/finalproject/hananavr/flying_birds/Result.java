@@ -1,25 +1,13 @@
 package com.finalproject.hananavr.flying_birds;
 
-import android.arch.persistence.room.Room;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.res.AssetManager;
-import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.util.List;
-import java.util.ListIterator;
 
 public class Result extends AppCompatActivity {
     int scoreFromCurrentGame;
@@ -58,20 +46,31 @@ public class Result extends AppCompatActivity {
 
     public void tryAgain(View view){
         NewGame.inGameBackgroundMusic.release();
-        MainActivity.appBgMusic.start();
+        MainActivity.gameBtnSfxSound.start();
         startActivity(new Intent(getApplicationContext(),NewGame.class));
     }
 
     public void mainMenuClick(View view){
         NewGame.inGameBackgroundMusic.release();
-        MainActivity.appBgMusic.start();
         startActivity(new Intent(getApplicationContext(),MainActivity.class));
     }
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
-        NewGame.inGameBackgroundMusic.stop();
+        //super.onBackPressed();
+        NewGame.inGameBackgroundMusic.release();
         startActivity(new Intent(getApplicationContext(),MainActivity.class));
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        NewGame.inGameBackgroundMusic.pause();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        NewGame.inGameBackgroundMusic.start();
     }
 }

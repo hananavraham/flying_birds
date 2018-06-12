@@ -25,7 +25,7 @@ public class Game extends View {
     Random r;
     Paint paint;
     InGameMenu igm;
-    Bitmap heart, inGameMenu, rightShooter, leftShooter;
+    Bitmap heart, inGameMenu;
     Shooter shooter;
     int pause_flg, lives, fontSize, score, difficultyChanger, difficultyChangerFlg, soundsToogle, whiteBirdClicksToKill;
     float xTouchPos;

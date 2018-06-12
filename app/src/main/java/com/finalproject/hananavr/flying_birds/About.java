@@ -15,4 +15,15 @@ public class About extends AppCompatActivity {
         setContentView(R.layout.activity_about);
     }
 
+    @Override
+    protected void onPause() {
+        super.onPause();
+        MainActivity.gameMenuBgMusic.pause();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        MainActivity.gameMenuBgMusic.start();
+    }
 }

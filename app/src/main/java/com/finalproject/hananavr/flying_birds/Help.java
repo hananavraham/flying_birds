@@ -14,4 +14,16 @@ public class Help extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_help);
     }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        MainActivity.gameMenuBgMusic.pause();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        MainActivity.gameMenuBgMusic.start();
+    }
 }
