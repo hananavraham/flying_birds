@@ -15,9 +15,4 @@ public class About extends AppCompatActivity {
         setContentView(R.layout.activity_about);
     }
 
-
-    public void mainMenuClick(View view){
-        MainActivity.appBgMusic.start();
-        startActivity(new Intent(getApplicationContext(),MainActivity.class));
-    }
 }

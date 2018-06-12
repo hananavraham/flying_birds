@@ -107,7 +107,6 @@ public class Game extends View {
                 }else if(score > 6000 && difficultyChangerFlg == 6){
                     difficultyChanger += 2;
                     difficultyChangerFlg++;
-                    whiteBirdClicksToKill = 4;
                 }else if(score > 7000 && difficultyChangerFlg == 7){
                     difficultyChanger += 2;
                     difficultyChangerFlg++;

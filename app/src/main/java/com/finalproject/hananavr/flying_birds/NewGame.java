@@ -60,4 +60,10 @@ public class NewGame extends AppCompatActivity implements MediaPlayer.OnPrepared
         super.onResume();
         inGameBackgroundMusic.start();
     }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        inGameBackgroundMusic.stop();
+    }
 }

@@ -14,9 +14,4 @@ public class Help extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_help);
     }
-
-    public void mainMenuClick(View view){
-        MainActivity.appBgMusic.start();
-        startActivity(new Intent(getApplicationContext(),MainActivity.class));
-    }
 }

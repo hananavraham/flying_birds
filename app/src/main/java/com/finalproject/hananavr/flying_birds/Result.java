@@ -67,4 +67,11 @@ public class Result extends AppCompatActivity {
         MainActivity.appBgMusic.start();
         startActivity(new Intent(getApplicationContext(),MainActivity.class));
     }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        NewGame.inGameBackgroundMusic.stop();
+        startActivity(new Intent(getApplicationContext(),MainActivity.class));
+    }
 }

@@ -57,11 +57,6 @@ public class Settings extends AppCompatActivity implements CheckBox.OnCheckedCha
         return IsSFX;
     }
 
-    public void mainMenuClick(View view){
-        MainActivity.appBgMusic.start();
-        startActivity(new Intent(getApplicationContext(),MainActivity.class));
-    }
-
     @Override
     public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
         audioManager.setStreamVolume(AudioManager.STREAM_MUSIC, progress, 0);
