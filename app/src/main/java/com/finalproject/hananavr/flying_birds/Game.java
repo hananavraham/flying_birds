@@ -27,7 +27,7 @@ public class Game extends View {
     InGameMenu igm;
     Bitmap heart, inGameMenu;
     Shooter shooter;
-    int pause_flg, lives, fontSize, score, difficultyChanger, difficultyChangerFlg, soundsToogle, whiteBirdClicksToKill;
+    int pause_flg, lives, fontSize, score, difficultyChanger, difficultyChangerFlg, soundsToogle, whiteBirdClicksToKill, currListSize;
     float xTouchPos;
 
     //Variables needed for proper random bird creation logic
@@ -200,11 +200,17 @@ public class Game extends View {
         super.onDraw(canvas);
 
         //Cause concurrent modification exception sometimes..
-        ListIterator it = birds.listIterator();
-        while (it.hasNext()){
-            Bird bird = (Bird) it.next();
-            bird.draw(canvas, pause_flg);
+//        ListIterator it = birds.listIterator();
+//        while (it.hasNext()){
+//            Bird bird = (Bird) it.next();
+//            bird.draw(canvas, pause_flg);
+//        }
+
+        currListSize = birds.size();
+        for(int i=0; i<currListSize; i++){
+            birds.get(i).draw(canvas, pause_flg);
         }
+
         //Drawing lives left as text
         canvas.drawText(String.valueOf(lives),10,fontSize, paint);
 
@@ -281,7 +287,7 @@ public class Game extends View {
         }
         if(removeFlg > 0){
             // returning the bird to the Birds List as new bird...
-            if (birds.size() > 4)
+            if (birds.size() > 4 || birds.get(i).score == 1)
                 birds.remove(i);
             else{
                 birds.get(i).setDead(false);
