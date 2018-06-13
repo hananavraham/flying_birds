@@ -27,13 +27,13 @@ public class Game extends View {
     InGameMenu igm;
     Bitmap heart, inGameMenu;
     Shooter shooter;
-    int pause_flg, lives, fontSize, score, difficultyChanger, difficultyChangerFlg, soundsToogle, whiteBirdClicksToKill, currListSize;
+    int lives, fontSize, score, difficultyChanger, difficultyChangerFlg, whiteBirdClicksToKill, currListSize, pause_flg, soundsToogle;
     float xTouchPos;
 
     //Variables needed for proper random bird creation logic
     Runnable runnable;
     ScheduledExecutorService service;
-    Future<?> future;
+    static Future<?> future;
 
     /**
      * Game class constructor.
@@ -329,6 +329,7 @@ public class Game extends View {
                     pausedStateThread.start();
                     return true;
                 }
+
                 if(soundsToogle == 0)
                     NewGame.arrowShoot.start();
                 xTouchPos = x;

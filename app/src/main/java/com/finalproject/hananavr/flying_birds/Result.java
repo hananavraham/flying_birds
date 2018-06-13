@@ -45,20 +45,18 @@ public class Result extends AppCompatActivity {
     }
 
     public void tryAgain(View view){
-        NewGame.inGameBackgroundMusic.release();
         MainActivity.gameBtnSfxSound.start();
         startActivity(new Intent(getApplicationContext(),NewGame.class));
     }
 
     public void mainMenuClick(View view){
-        NewGame.inGameBackgroundMusic.release();
+        MainActivity.gameBtnSfxSound.start();
         startActivity(new Intent(getApplicationContext(),MainActivity.class));
     }
 
     @Override
     public void onBackPressed() {
         //super.onBackPressed();
-        NewGame.inGameBackgroundMusic.release();
         startActivity(new Intent(getApplicationContext(),MainActivity.class));
     }
 

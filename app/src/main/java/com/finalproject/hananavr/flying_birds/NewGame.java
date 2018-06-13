@@ -7,6 +7,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.WindowManager;
 
+import java.util.ListIterator;
+
 public class NewGame extends AppCompatActivity implements MediaPlayer.OnPreparedListener {
 
     Game game;
@@ -46,8 +48,8 @@ public class NewGame extends AppCompatActivity implements MediaPlayer.OnPrepared
     @Override
     protected void onPause() {
         super.onPause();
-        //Need to check how to pause music when game is paused...right now this crashes the game
-       // inGameBackgroundMusic.pause();
+        //This line crashes the game if we restart or going back to main menu
+        //inGameBackgroundMusic.pause();
     }
 
 
