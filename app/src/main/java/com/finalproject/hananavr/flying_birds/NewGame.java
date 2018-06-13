@@ -6,6 +6,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.WindowManager;
+import android.widget.Toast;
 
 import java.util.ListIterator;
 
@@ -65,4 +66,13 @@ public class NewGame extends AppCompatActivity implements MediaPlayer.OnPrepared
         inGameBackgroundMusic.stop();
         startActivity(new Intent(getApplicationContext(),MainActivity.class));
     }
+
+    @Override
+    protected void onUserLeaveHint() {
+        inGameBackgroundMusic.pause();
+        game.pause_flg = 1;
+        super.onUserLeaveHint();
+    }
+
+
 }
