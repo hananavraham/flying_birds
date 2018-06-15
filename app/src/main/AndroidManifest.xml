@@ -30,6 +30,10 @@
             android:name=".NewGame"
             android:screenOrientation="landscape" />
 
+        <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="f18fce74befc0a63e0fdf057815acf51d9e5b9c1" />
     </application>
 
+    <uses-permission android:name="android.permission.INTERNET" />
 </manifest>

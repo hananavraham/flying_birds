@@ -60,18 +60,25 @@ public class NewGame extends AppCompatActivity implements MediaPlayer.OnPrepared
         inGameBackgroundMusic.start();
     }
 
+
+    //The 3 below methods needs to deal with pausing the game correctly when the game is minimized or back button is pressed
     @Override
     public void onBackPressed() {
         //super.onBackPressed();
-        inGameBackgroundMusic.stop();
-        startActivity(new Intent(getApplicationContext(),MainActivity.class));
+        //inGameBackgroundMusic.stop();
+        //startActivity(new Intent(getApplicationContext(),MainActivity.class));
+        pauseGame();
     }
 
     @Override
     protected void onUserLeaveHint() {
-        inGameBackgroundMusic.pause();
-        game.pause_flg = 1;
+        pauseGame();
         super.onUserLeaveHint();
+    }
+
+    private void pauseGame(){
+            inGameBackgroundMusic.pause();
+            game.pause_flg = 1;
     }
 
 

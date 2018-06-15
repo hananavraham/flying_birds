@@ -33,7 +33,7 @@ public class Game extends View {
     //Variables needed for proper random bird creation logic
     Runnable runnable;
     ScheduledExecutorService service;
-    static Future<?> future;
+    Future<?> future;
 
     /**
      * Game class constructor.
