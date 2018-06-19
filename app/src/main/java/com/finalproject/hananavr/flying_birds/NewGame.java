@@ -9,6 +9,7 @@ import android.view.WindowManager;
 import android.widget.Toast;
 
 import java.util.ListIterator;
+import java.util.concurrent.TimeUnit;
 
 public class NewGame extends AppCompatActivity implements MediaPlayer.OnPreparedListener {
 
@@ -16,6 +17,7 @@ public class NewGame extends AppCompatActivity implements MediaPlayer.OnPrepared
     static MediaPlayer inGameBackgroundMusic;
     static MediaPlayer arrowShoot;
     static MediaPlayer deadBird;
+    static int backpressedFlg;
 
 
     @Override
@@ -23,6 +25,7 @@ public class NewGame extends AppCompatActivity implements MediaPlayer.OnPrepared
         super.onCreate(savedInstanceState);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         game = new Game(this);
+        backpressedFlg = 0;
         inGameBackgroundMusic = MediaPlayer.create(getApplicationContext(),R.raw.gamemusic);
         inGameBackgroundMusic.setLooping(true);
         inGameBackgroundMusic.setOnPreparedListener(this);
@@ -39,6 +42,7 @@ public class NewGame extends AppCompatActivity implements MediaPlayer.OnPrepared
             game.setBackground(ContextCompat.getDrawable(this, R.drawable.ingamebackground));
         }
         setContentView(game);
+        newGame();
     }
 
     @Override
@@ -46,12 +50,12 @@ public class NewGame extends AppCompatActivity implements MediaPlayer.OnPrepared
         inGameBackgroundMusic.start();
     }
 
-    @Override
-    protected void onPause() {
-        super.onPause();
-        //This line crashes the game if we restart or going back to main menu
-        //inGameBackgroundMusic.pause();
-    }
+//    @Override
+//    protected void onPause() {
+//        super.onPause();
+//        //This line crashes the game if we restart or going back to main menu
+//        //inGameBackgroundMusic.pause();
+//    }
 
 
     @Override
@@ -60,26 +64,50 @@ public class NewGame extends AppCompatActivity implements MediaPlayer.OnPrepared
         inGameBackgroundMusic.start();
     }
 
+    private void newGame(){
+        if(Game.birds.size() > 0)
+            Game.birds.clear();
+    }
 
-    //The 3 below methods needs to deal with pausing the game correctly when the game is minimized or back button is pressed
     @Override
     public void onBackPressed() {
         //super.onBackPressed();
-        //inGameBackgroundMusic.stop();
-        //startActivity(new Intent(getApplicationContext(),MainActivity.class));
-        pauseGame();
+        if(backpressedFlg == 0){
+            backpressedFlg = 1;
+            pauseGame();
+        }
+        else{
+            backpressedFlg = 0;
+            unPauseGame();
+        }
+    }
+
+    private void pauseGame(){
+        game.pause_flg = 1;
+        Game.future.cancel(true);
+        ListIterator it = Game.birds.listIterator();
+        while(it.hasNext()){
+            Bird bird = (Bird) it.next();
+            bird.pausedState();
+        }
+    }
+
+    private void unPauseGame(){
+        game.pause_flg = 0;
+        Game.future = Game.service.scheduleAtFixedRate(Game.runnable, 1, 3, TimeUnit.SECONDS);
+        ListIterator it = Game.birds.listIterator();
+        while(it.hasNext()){
+            Bird bird = (Bird) it.next();
+            bird.runningState();
+        }
     }
 
     @Override
     protected void onUserLeaveHint() {
         pauseGame();
+        inGameBackgroundMusic.pause();
+        backpressedFlg = 1;
         super.onUserLeaveHint();
     }
-
-    private void pauseGame(){
-            inGameBackgroundMusic.pause();
-            game.pause_flg = 1;
-    }
-
 
 }

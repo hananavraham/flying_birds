@@ -21,7 +21,7 @@ import java.util.concurrent.TimeUnit;
 
 public class Game extends View {
 
-    ArrayList<Bird> birds = new ArrayList<>();
+    static ArrayList<Bird> birds = new ArrayList<>();
     Random r;
     Paint paint;
     InGameMenu igm;
@@ -31,9 +31,9 @@ public class Game extends View {
     float xTouchPos;
 
     //Variables needed for proper random bird creation logic
-    Runnable runnable;
-    ScheduledExecutorService service;
-    Future<?> future;
+    static Runnable runnable;
+    static ScheduledExecutorService service;
+    static Future<?> future;
 
     /**
      * Game class constructor.
@@ -379,13 +379,14 @@ public class Game extends View {
                     };
                     runningStateThread.start();
                     pause_flg = 0;
+                    NewGame.backpressedFlg = 0;
                 }
                 //If restart option is pressed
                 if(x >= 820 && x < (820+igm.getOptionWidth()) && y >= 370 && y < (370+igm.getOptionHeight())){
                     future.cancel(true);
                     Thread restartGameThread = new Thread(){
                         public void run(){
-                            NewGame.inGameBackgroundMusic.release();
+                            NewGame.inGameBackgroundMusic.stop();
                             getContext().startActivity(new Intent(getContext(),NewGame.class));
                         }
                     };
@@ -398,7 +399,7 @@ public class Game extends View {
                     future.cancel(true);
                     Thread backToMainMenuThread = new Thread(){
                         public void run(){
-                            NewGame.inGameBackgroundMusic.release();
+                            NewGame.inGameBackgroundMusic.stop();
                             getContext().startActivity(new Intent(getContext(),MainActivity.class));
                         }
                     };
