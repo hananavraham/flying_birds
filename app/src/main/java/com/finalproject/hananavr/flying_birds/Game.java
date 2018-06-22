@@ -30,6 +30,8 @@ public class Game extends View {
     int lives, fontSize, score, difficultyChanger, difficultyChangerFlg, whiteBirdClicksToKill, currListSize, pause_flg, soundsToogle;
     float xTouchPos;
 
+    SurvivalTimer st;
+
     //Variables needed for proper random bird creation logic
     static Runnable runnable;
     static ScheduledExecutorService service;
@@ -42,7 +44,8 @@ public class Game extends View {
      */
     public Game(Context context) {
         super(context);
-
+        st = new SurvivalTimer();
+        st.startSurvivalTimer();
         //Needed variables for game flow
         r = new Random();
         lives = 5;
@@ -206,6 +209,8 @@ public class Game extends View {
 //            bird.draw(canvas, pause_flg);
 //        }
 
+        shooter.draw(canvas, xTouchPos);
+
         currListSize = birds.size();
         for(int i=0; i<currListSize; i++){
             birds.get(i).draw(canvas, pause_flg);
@@ -220,12 +225,13 @@ public class Game extends View {
         //Drawing current score as text
         canvas.drawText("Score: "+String.valueOf(score),125,fontSize, paint);
 
+        //Drawing survival timer
+        canvas.drawText(String.valueOf(st.getMinutesTenths())+String.valueOf(st.getMinutesOneness())+":"+String.valueOf(st.getSecondsTenths())+String.valueOf(st.getSecondsOneness()),(Resources.getSystem().getDisplayMetrics().widthPixels)/2,fontSize, paint);
+
         //Drawing in game menu image
         canvas.drawBitmap(inGameMenu,Resources.getSystem().getDisplayMetrics().widthPixels-100,4,null);
 
         checkBirdPassingScreen();
-
-        shooter.draw(canvas, xTouchPos);
 
         if(pause_flg == 1){
             igm.draw(canvas,soundsToogle);
@@ -251,10 +257,15 @@ public class Game extends View {
                         lives--;
                     if (lives == 0){    // Game Over
                         future.cancel(true);
+                        SurvivalTimer.timerFuture.cancel(true);
                         Thread resultThread = new Thread(){
                             public void run(){
                                 Intent resultThread = new Intent(getContext(), Result.class);
                                 resultThread.putExtra("SCORE",score);
+                                resultThread.putExtra("SECONDS_ONENESS",st.getSecondsOneness());
+                                resultThread.putExtra("SECONDS_TENTHS",st.getSecondsTenths());
+                                resultThread.putExtra("MINUTES_ONENESS",st.getMinutesOneness());
+                                resultThread.putExtra("MINUTES_TENTHS",st.getMinutesTenths());
                                 getContext().startActivity(resultThread);
                             }
                         };
@@ -271,10 +282,15 @@ public class Game extends View {
                         lives--;
                     if (lives == 0){    // Game Over
                         future.cancel(true);
+                        SurvivalTimer.timerFuture.cancel(true);
                         Thread resultThread = new Thread(){
                             public void run(){
                                 Intent resultThread = new Intent(getContext(), Result.class);
                                 resultThread.putExtra("SCORE",score);
+                                resultThread.putExtra("SECONDS_ONENESS",st.getSecondsOneness());
+                                resultThread.putExtra("SECONDS_TENTHS",st.getSecondsTenths());
+                                resultThread.putExtra("MINUTES_ONENESS",st.getMinutesOneness());
+                                resultThread.putExtra("MINUTES_TENTHS",st.getMinutesTenths());
                                 getContext().startActivity(resultThread);
                             }
                         };
@@ -317,6 +333,7 @@ public class Game extends View {
                 if(x >= Resources.getSystem().getDisplayMetrics().widthPixels-100 && x < (Resources.getSystem().getDisplayMetrics().widthPixels-100+inGameMenu.getWidth()) && y >= 4 && y < (4+inGameMenu.getHeight())){
                     pause_flg = 1;
                     future.cancel(true);
+                    SurvivalTimer.timerFuture.cancel(true);
                     Thread pausedStateThread = new Thread(){
                         public void run(){
                             ListIterator it = birds.listIterator();
@@ -368,6 +385,7 @@ public class Game extends View {
                 if(x >= 820 && x < (820+igm.getOptionWidth()) && y >= 270 && y < (270+igm.getOptionHeight()))
                 {
                     future = service.scheduleAtFixedRate(runnable, 2, 3, TimeUnit.SECONDS);
+                    SurvivalTimer.timerFuture = SurvivalTimer.timerService.scheduleAtFixedRate(SurvivalTimer.timerRunnable, 1, 1, TimeUnit.SECONDS);
                     Thread runningStateThread = new Thread(){
                         public void run(){
                             ListIterator it = birds.listIterator();
@@ -384,6 +402,7 @@ public class Game extends View {
                 //If restart option is pressed
                 if(x >= 820 && x < (820+igm.getOptionWidth()) && y >= 370 && y < (370+igm.getOptionHeight())){
                     future.cancel(true);
+                    SurvivalTimer.timerFuture.cancel(true);
                     Thread restartGameThread = new Thread(){
                         public void run(){
                             NewGame.inGameBackgroundMusic.stop();
@@ -397,6 +416,7 @@ public class Game extends View {
                 //If main menu option is pressed
                 if(x >= 820 && x < (820+igm.getOptionWidth()) && y >= 470 && y < (470+igm.getOptionHeight())){
                     future.cancel(true);
+                    SurvivalTimer.timerFuture.cancel(true);
                     Thread backToMainMenuThread = new Thread(){
                         public void run(){
                             NewGame.inGameBackgroundMusic.stop();

@@ -58,15 +58,12 @@ public class NewGame extends AppCompatActivity implements MediaPlayer.OnPrepared
 //    }
 
 
+    /*The below methods deal with back & home buttons presss*/
+
     @Override
     protected void onResume() {
         super.onResume();
         inGameBackgroundMusic.start();
-    }
-
-    private void newGame(){
-        if(Game.birds.size() > 0)
-            Game.birds.clear();
     }
 
     @Override
@@ -82,9 +79,23 @@ public class NewGame extends AppCompatActivity implements MediaPlayer.OnPrepared
         }
     }
 
+    @Override
+    protected void onUserLeaveHint() {
+        pauseGame();
+        inGameBackgroundMusic.pause();
+        backpressedFlg = 1;
+        super.onUserLeaveHint();
+    }
+
+    private void newGame(){
+        if(Game.birds.size() > 0)
+            Game.birds.clear();
+    }
+
     private void pauseGame(){
         game.pause_flg = 1;
         Game.future.cancel(true);
+        SurvivalTimer.timerFuture.cancel(true);
         ListIterator it = Game.birds.listIterator();
         while(it.hasNext()){
             Bird bird = (Bird) it.next();
@@ -95,19 +106,12 @@ public class NewGame extends AppCompatActivity implements MediaPlayer.OnPrepared
     private void unPauseGame(){
         game.pause_flg = 0;
         Game.future = Game.service.scheduleAtFixedRate(Game.runnable, 1, 3, TimeUnit.SECONDS);
+        SurvivalTimer.timerFuture = SurvivalTimer.timerService.scheduleAtFixedRate(SurvivalTimer.timerRunnable, 1, 1, TimeUnit.SECONDS);
         ListIterator it = Game.birds.listIterator();
         while(it.hasNext()){
             Bird bird = (Bird) it.next();
             bird.runningState();
         }
-    }
-
-    @Override
-    protected void onUserLeaveHint() {
-        pauseGame();
-        inGameBackgroundMusic.pause();
-        backpressedFlg = 1;
-        super.onUserLeaveHint();
     }
 
 }
