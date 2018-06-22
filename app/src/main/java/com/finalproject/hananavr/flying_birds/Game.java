@@ -21,21 +21,22 @@ import java.util.concurrent.TimeUnit;
 
 public class Game extends View {
 
-    static ArrayList<Bird> birds = new ArrayList<>();
-    Random r;
-    Paint paint;
-    InGameMenu igm;
-    Bitmap heart, inGameMenu;
-    Shooter shooter;
-    int lives, fontSize, score, difficultyChanger, difficultyChangerFlg, whiteBirdClicksToKill, currListSize, pause_flg, soundsToogle;
-    float xTouchPos;
+    protected ArrayList<Bird> birds = new ArrayList<>();
+    private Random r;
+    private Paint paint;
+    private InGameMenu igm;
+    private Bitmap heart, inGameMenu;
+    private Shooter shooter;
+    private int lives, fontSize, score, difficultyChanger, difficultyChangerFlg, whiteBirdClicksToKill, currListSize;
+    protected int pause_flg, soundsToogle;
+    private float xTouchPos;
 
-    SurvivalTimer st;
+    private SurvivalTimer st;
 
     //Variables needed for proper random bird creation logic
-    static Runnable runnable;
-    static ScheduledExecutorService service;
-    static Future<?> future;
+    protected Runnable runnable;
+    protected ScheduledExecutorService service;
+    protected Future<?> future;
 
     /**
      * Game class constructor.

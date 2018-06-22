@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.finalproject.hananavr.flying_birds">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -29,11 +31,15 @@
         <activity
             android:name=".NewGame"
             android:screenOrientation="landscape" />
+        <activity
+            android:name=".SettingsActivity"
+            android:screenOrientation="landscape" />
 
         <meta-data
             android:name="io.fabric.ApiKey"
             android:value="f18fce74befc0a63e0fdf057815acf51d9e5b9c1" />
+
+
     </application>
 
-    <uses-permission android:name="android.permission.INTERNET" />
 </manifest>

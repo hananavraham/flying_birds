@@ -34,6 +34,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 gameBtnSfxSound.start();
                 startActivity(new Intent(getApplicationContext(),NewGame.class));
                 break;
+            case R.id.btnSettings:
+                gameBtnSfxSound.start();
+                startActivity(new Intent(getApplicationContext(),SettingsActivity.class));
+                break;
             case R.id.btnHelp:
                 gameBtnSfxSound.start();
                 startActivity(new Intent(getApplicationContext(),Help.class));

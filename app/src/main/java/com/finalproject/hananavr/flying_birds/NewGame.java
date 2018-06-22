@@ -50,25 +50,25 @@ public class NewGame extends AppCompatActivity implements MediaPlayer.OnPrepared
         inGameBackgroundMusic.start();
     }
 
-//    @Override
-//    protected void onPause() {
-//        super.onPause();
-//        //This line crashes the game if we restart or going back to main menu
-//        //inGameBackgroundMusic.pause();
-//    }
+    /*The below methods deal with built in phone buttons presses(circle, square, triangular)*/
 
-
-    /*The below methods deal with back & home buttons presss*/
+    @Override
+    protected void onPause() {
+        pauseGame();
+        inGameBackgroundMusic.pause();
+        backpressedFlg = 1;
+        super.onPause();
+    }
 
     @Override
     protected void onResume() {
         super.onResume();
-        inGameBackgroundMusic.start();
+        if(game.soundsToogle == 0)
+            inGameBackgroundMusic.start();
     }
 
     @Override
     public void onBackPressed() {
-        //super.onBackPressed();
         if(backpressedFlg == 0){
             backpressedFlg = 1;
             pauseGame();
@@ -79,38 +79,35 @@ public class NewGame extends AppCompatActivity implements MediaPlayer.OnPrepared
         }
     }
 
-    @Override
-    protected void onUserLeaveHint() {
-        pauseGame();
-        inGameBackgroundMusic.pause();
-        backpressedFlg = 1;
-        super.onUserLeaveHint();
-    }
 
     private void newGame(){
-        if(Game.birds.size() > 0)
-            Game.birds.clear();
+        if(game.birds.size() > 0)
+            game.birds.clear();
     }
 
     private void pauseGame(){
-        game.pause_flg = 1;
-        Game.future.cancel(true);
-        SurvivalTimer.timerFuture.cancel(true);
-        ListIterator it = Game.birds.listIterator();
-        while(it.hasNext()){
-            Bird bird = (Bird) it.next();
-            bird.pausedState();
+        if(game.pause_flg != 1){
+            game.pause_flg = 1;
+            game.future.cancel(true);
+            SurvivalTimer.timerFuture.cancel(true);
+            ListIterator it = game.birds.listIterator();
+            while(it.hasNext()){
+                Bird bird = (Bird) it.next();
+                bird.pausedState();
+            }
         }
     }
 
     private void unPauseGame(){
-        game.pause_flg = 0;
-        Game.future = Game.service.scheduleAtFixedRate(Game.runnable, 1, 3, TimeUnit.SECONDS);
-        SurvivalTimer.timerFuture = SurvivalTimer.timerService.scheduleAtFixedRate(SurvivalTimer.timerRunnable, 1, 1, TimeUnit.SECONDS);
-        ListIterator it = Game.birds.listIterator();
-        while(it.hasNext()){
-            Bird bird = (Bird) it.next();
-            bird.runningState();
+        if(game.pause_flg != 0){
+            game.pause_flg = 0;
+            game.future = game.service.scheduleAtFixedRate(game.runnable, 2, 3, TimeUnit.SECONDS);
+            SurvivalTimer.timerFuture = SurvivalTimer.timerService.scheduleAtFixedRate(SurvivalTimer.timerRunnable, 1, 1, TimeUnit.SECONDS);
+            ListIterator it = game.birds.listIterator();
+            while(it.hasNext()){
+                Bird bird = (Bird) it.next();
+                bird.runningState();
+            }
         }
     }
 

@@ -9,7 +9,7 @@
     <string name="exit">Exit Game</string>
     <string name="game_over">GAME OVER</string>
     <string name="try_again">Try Again</string>
-    <string name="sfx">SFX sounds on</string>
+    <string name="sfx">SFX sounds ON</string>
     <string name="version">Version 1.0</string>
     <string name="creators">This game is created by Matan Nabatian, Hanan Avraham and Leon Benjamin.</string>
     <string name="course">Developed in the Introduction to Mobile Computing Course, 2018. Instructors: Dr. Amnon Dekel and Amir Uval.</string>
