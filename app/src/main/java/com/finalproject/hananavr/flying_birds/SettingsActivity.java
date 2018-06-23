@@ -2,6 +2,7 @@ package com.finalproject.hananavr.flying_birds;
 
 import android.content.Context;
 import android.media.AudioManager;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.WindowManager;
@@ -36,6 +37,8 @@ public class SettingsActivity extends AppCompatActivity implements SeekBar.OnSee
 
         sbVolume.setOnSeekBarChangeListener(this);
         cbSfxSounds.setOnCheckedChangeListener(this);
+
+        cbSfxSounds.setChecked(PreferenceManager.getDefaultSharedPreferences(this).getBoolean("SETTINGS_CB", true));
     }
 
     @Override
@@ -59,10 +62,14 @@ public class SettingsActivity extends AppCompatActivity implements SeekBar.OnSee
 
     @Override
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-        if(isChecked)
+        if(isChecked){
             cbSfxSounds.setText("SFX Sounds ON");
-        else
+            PreferenceManager.getDefaultSharedPreferences(this).edit().putBoolean("SETTINGS_CB",true).apply();
+        }else{
             cbSfxSounds.setText("SFX Sounds OFF");
+            PreferenceManager.getDefaultSharedPreferences(this).edit().putBoolean("SETTINGS_CB",false).apply();
+        }
+
     }
 
     @Override

@@ -3,6 +3,7 @@ package com.finalproject.hananavr.flying_birds;
 import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Build;
+import android.preference.PreferenceManager;
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -14,6 +15,8 @@ import io.fabric.sdk.android.Fabric;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener, MediaPlayer.OnPreparedListener {
     static MediaPlayer gameBtnSfxSound;
     static MediaPlayer gameMenuBgMusic;
+    private boolean isSfxOn;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,25 +28,31 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         gameMenuBgMusic = MediaPlayer.create(getApplicationContext(), R.raw.ingamebgsound);
         gameMenuBgMusic.setLooping(true);
         gameMenuBgMusic.setOnPreparedListener(this);
+
+        isSfxOn = PreferenceManager.getDefaultSharedPreferences(this).getBoolean("SETTINGS_CB", true);
     }
 
     @Override
     public void onClick(View v) {
         switch(v.getId()){
             case R.id.btnNewGame:
-                gameBtnSfxSound.start();
+                if(isSfxOn)
+                    gameBtnSfxSound.start();
                 startActivity(new Intent(getApplicationContext(),NewGame.class));
                 break;
             case R.id.btnSettings:
-                gameBtnSfxSound.start();
+                if(isSfxOn)
+                    gameBtnSfxSound.start();
                 startActivity(new Intent(getApplicationContext(),SettingsActivity.class));
                 break;
             case R.id.btnHelp:
-                gameBtnSfxSound.start();
+                if(isSfxOn)
+                    gameBtnSfxSound.start();
                 startActivity(new Intent(getApplicationContext(),Help.class));
                 break;
             case R.id.btnAbout:
-                gameBtnSfxSound.start();
+                if(isSfxOn)
+                    gameBtnSfxSound.start();
                 startActivity(new Intent(getApplicationContext(),About.class));
                 break;
         }
@@ -70,5 +79,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onResume() {
         super.onResume();
         gameMenuBgMusic.start();
+        isSfxOn = PreferenceManager.getDefaultSharedPreferences(this).getBoolean("SETTINGS_CB", true);
     }
+
 }

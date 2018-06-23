@@ -2,6 +2,7 @@ package com.finalproject.hananavr.flying_birds;
 
 import android.content.Intent;
 import android.media.MediaPlayer;
+import android.preference.PreferenceManager;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -54,9 +55,11 @@ public class NewGame extends AppCompatActivity implements MediaPlayer.OnPrepared
 
     @Override
     protected void onPause() {
-        pauseGame();
-        inGameBackgroundMusic.pause();
-        backpressedFlg = 1;
+        if(game.gameOver != 1){
+            pauseGame();
+            inGameBackgroundMusic.pause();
+            backpressedFlg = 1;
+        }
         super.onPause();
     }
 

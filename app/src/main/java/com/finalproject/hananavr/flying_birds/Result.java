@@ -3,6 +3,7 @@ package com.finalproject.hananavr.flying_birds;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -10,14 +11,18 @@ import android.view.WindowManager;
 import android.widget.TextView;
 
 public class Result extends AppCompatActivity {
-    int scoreFromCurrentGame;
-    int secondsOneness, secondsTenths, minutesOneness, minutesTenths;
-    int highscore = 0;
+    private int scoreFromCurrentGame;
+    private int secondsOneness, secondsTenths, minutesOneness, minutesTenths;
+    private int highscore;
+    boolean isSfxOn;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_result);
+
+        highscore = 0;
 
         Bundle extras = getIntent().getExtras();
         scoreFromCurrentGame = extras.getInt("SCORE");
@@ -52,15 +57,19 @@ public class Result extends AppCompatActivity {
         else{
             highScoreLabel.setText("High Score is: " + highscore+ " | "+String.valueOf(settings.getInt("minutesTenths", 0))+String.valueOf(settings.getInt("minutesOneness", 0))+":"+String.valueOf(settings.getInt("secondsTenths", 0))+String.valueOf(settings.getInt("secondsOneness", 0)));
         }
+
+        isSfxOn = PreferenceManager.getDefaultSharedPreferences(this).getBoolean("SETTINGS_CB", true);
     }
 
     public void tryAgain(View view){
-        MainActivity.gameBtnSfxSound.start();
+        if(isSfxOn)
+            MainActivity.gameBtnSfxSound.start();
         startActivity(new Intent(getApplicationContext(),NewGame.class));
     }
 
     public void mainMenuClick(View view){
-        MainActivity.gameBtnSfxSound.start();
+        if(isSfxOn)
+            MainActivity.gameBtnSfxSound.start();
         startActivity(new Intent(getApplicationContext(),MainActivity.class));
     }
 

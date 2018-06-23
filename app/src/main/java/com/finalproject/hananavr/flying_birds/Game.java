@@ -28,7 +28,7 @@ public class Game extends View {
     private Bitmap heart, inGameMenu;
     private Shooter shooter;
     private int lives, fontSize, score, difficultyChanger, difficultyChangerFlg, whiteBirdClicksToKill, currListSize;
-    protected int pause_flg, soundsToogle;
+    protected int pause_flg, soundsToogle, gameOver;
     private float xTouchPos;
 
     private SurvivalTimer st;
@@ -47,7 +47,7 @@ public class Game extends View {
         super(context);
         st = new SurvivalTimer();
         st.startSurvivalTimer();
-        //Needed variables for game flow
+        //Needed variables for proper game flow
         r = new Random();
         lives = 5;
         pause_flg = 0;
@@ -57,8 +57,9 @@ public class Game extends View {
         xTouchPos = 0;
         soundsToogle = 0;
         whiteBirdClicksToKill = 8;
+        gameOver = 0;
 
-        shooter = new Shooter(context, Resources.getSystem().getDisplayMetrics().widthPixels/2-90, 440);
+        shooter = new Shooter(context, Resources.getSystem().getDisplayMetrics().widthPixels/2-90, Resources.getSystem().getDisplayMetrics().heightPixels-630);
 
         //Setting in game fonts style
         fontSize = getResources().getDimensionPixelSize(R.dimen.inGameFontSize);
@@ -256,7 +257,8 @@ public class Game extends View {
                 if(birds.get(i).getX() > Resources.getSystem().getDisplayMetrics().widthPixels && !birds.get(i).IsDead()){
                     if(lives > 0)
                         lives--;
-                    if (lives == 0){    // Game Over
+                    if (lives == 0){// Game Over
+                        gameOver = 1;
                         future.cancel(true);
                         SurvivalTimer.timerFuture.cancel(true);
                         Thread resultThread = new Thread(){
@@ -282,6 +284,7 @@ public class Game extends View {
                     if(lives > 0)
                         lives--;
                     if (lives == 0){    // Game Over
+                        gameOver = 1;
                         future.cancel(true);
                         SurvivalTimer.timerFuture.cancel(true);
                         Thread resultThread = new Thread(){
