@@ -18,6 +18,17 @@
                                 <PersistentState>
                                   <option name="children">
                                     <map>
+                                      <entry key="clipArt">
+                                        <value>
+                                          <PersistentState>
+                                            <option name="values">
+                                              <map>
+                                                <entry key="trimmed" value="true" />
+                                              </map>
+                                            </option>
+                                          </PersistentState>
+                                        </value>
+                                      </entry>
                                       <entry key="image">
                                         <value>
                                           <PersistentState>
@@ -34,8 +45,9 @@
                                   <option name="values">
                                     <map>
                                       <entry key="assetType" value="IMAGE" />
-                                      <entry key="backgroundColor" value="e6b383" />
-                                      <entry key="imageAsset" value="C:\Users\Matan Nabatian\AndroidStudioProjects\flying_birds\app\src\main\res\drawable-v24\ic_launcher.png" />
+                                      <entry key="backgroundColor" value="fefff9" />
+                                      <entry key="iconShape" value="CIRCLE" />
+                                      <entry key="imageAsset" value="C:\Users\Leon\Desktop\gameicon.png" />
                                     </map>
                                   </option>
                                 </PersistentState>

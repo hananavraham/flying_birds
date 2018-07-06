@@ -9,7 +9,7 @@
     tools:context=".MainActivity">
 
 
-    <Button
+    <ImageButton
         android:id="@+id/btnNewGame"
         style="@style/Widget.AppCompat.Button.Borderless"
         android:layout_width="wrap_content"
@@ -18,18 +18,17 @@
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginTop="32dp"
+        android:contentDescription="@string/new_game"
         android:onClick="onClick"
-        android:text="@string/new_game"
-        android:textSize="@dimen/btnFontSize"
+        android:src="@drawable/playbtn"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.006"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.929"
-        tools:style="@style/Widget.AppCompat.Button" />
+        app:layout_constraintVertical_bias="0.935" />
 
-    <Button
+    <ImageButton
         android:id="@+id/btnSettings"
         style="@android:style/Widget.DeviceDefault.Button.Borderless"
         android:layout_width="wrap_content"
@@ -38,18 +37,17 @@
         android:layout_marginEnd="272dp"
         android:layout_marginRight="272dp"
         android:layout_marginTop="8dp"
+        android:contentDescription="@string/settings"
         android:onClick="onClick"
-        android:text="@string/settings"
-        android:textSize="@dimen/btnFontSize"
+        android:src="@drawable/settingsbtn"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.709"
+        app:layout_constraintHorizontal_bias="0.55"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.935"
-        tools:style="@style/Widget.AppCompat.Button" />
+        app:layout_constraintVertical_bias="0.935" />
 
-    <Button
+    <ImageButton
         android:id="@+id/btnHelp"
         style="@style/Widget.AppCompat.Button.Borderless"
         android:layout_width="wrap_content"
@@ -60,17 +58,17 @@
         android:layout_marginRight="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="32dp"
+        android:contentDescription="@string/help"
         android:onClick="onClick"
-        android:text="@string/help"
-        android:textSize="@dimen/btnFontSize"
+        android:src="@drawable/helpbtn"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.752"
+        app:layout_constraintHorizontal_bias="0.75"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.929" />
+        app:layout_constraintVertical_bias="0.935" />
 
-    <Button
+    <ImageButton
         android:id="@+id/btnAbout"
         style="@style/Widget.AppCompat.Button.Borderless"
         android:layout_width="wrap_content"
@@ -81,14 +79,14 @@
         android:layout_marginRight="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="32dp"
+        android:contentDescription="@string/about"
         android:onClick="onClick"
-        android:text="@string/about"
-        android:textSize="@dimen/btnFontSize"
+        android:src="@drawable/aboutbtn"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.983"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.929" />
+        app:layout_constraintVertical_bias="0.935" />
 
 </android.support.constraint.ConstraintLayout>
