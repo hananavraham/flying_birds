@@ -14,7 +14,8 @@
     <string name="volume_control">Volume Control:</string>
     <string name="sfx">SFX sounds ON</string>
     <string name="version">Version 1.0</string>
-    <string name="creators">This game is created by Matan Nabatian, Hanan Avraham and Leon Benjamin.</string>
-    <string name="course">Developed in the Introduction to Mobile Computing Course, 2018. Instructors: Dr. Amnon Dekel and Amir Uval.</string>
+    <string name="creators">This game was created by Matan Nabatian, Hanan Avraham and Leon Benjamin.</string>
+    <string name="course">Developed in the Introduction to Mobile Computing Course, 2018.</string>
+    <string name="lecturers">Instructors: Dr. Amnon Dekel and Amir Uval.</string>
     <string name="college">© 2018 - The Dept. of Software Engineering, Shenkar: Engineering. Design. Art. </string>
 </resources>
