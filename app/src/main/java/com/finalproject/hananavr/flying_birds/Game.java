@@ -83,7 +83,7 @@ public class Game extends View {
     }
 
     /**
-     * Creates a bird every 3 seconds with random values and suitable speed according to the current score.
+     * Creates a random bird every 3 seconds with random values and suitable speed according to the current score.
      */
     private void startGame() {
         runnable = new Runnable() {
@@ -204,13 +204,6 @@ public class Game extends View {
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
 
-        //Cause concurrent modification exception sometimes..
-//        ListIterator it = birds.listIterator();
-//        while (it.hasNext()){
-//            Bird bird = (Bird) it.next();
-//            bird.draw(canvas, pause_flg);
-//        }
-
         shooter.draw(canvas, xTouchPos);
 
         currListSize = birds.size();
@@ -242,7 +235,9 @@ public class Game extends View {
     }
 
     /**
-     * This function checks whether a bird flew off the screen (On y and x axis)
+     * This function checks whether a bird flew off the screen (On y and x axis).
+     * If the bird flew off the screen on X axis - lives count will be reduce by 1. If it reaches zero then game over and the game will load the result activity.
+     * If the bird flew oof the screen on Y axis - the bird will be generated again with random value if the birds count on screen is less then 5. Else it will be removed.
      */
     private void checkBirdPassingScreen() {
         int i, removeFlg = 0;
@@ -322,7 +317,8 @@ public class Game extends View {
     }
 
     /**
-     * This function checks every screen touch according to the current game state
+     * This function checks every screen touch according to the current game state.
+     * There are 2 states: running game or paused game. If pause_flg = 0 then the game is Running. Else if pause_flg = 1 then the game is paused.
      * @param event
      * @return true if the touch was handled properly and false if not
      */
@@ -452,6 +448,3 @@ public class Game extends View {
 
 
 }
-
-
-// Toast.makeText(this.getContext().getApplicationContext(), "Text" ,Toast.LENGTH_LONG).show();

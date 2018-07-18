@@ -58,24 +58,24 @@ public class Result extends AppCompatActivity {
             highScoreLabel.setText("High Score is: " + highscore+ " | "+String.valueOf(settings.getInt("minutesTenths", 0))+String.valueOf(settings.getInt("minutesOneness", 0))+":"+String.valueOf(settings.getInt("secondsTenths", 0))+String.valueOf(settings.getInt("secondsOneness", 0)));
         }
 
+        //Holds true if SFX sounds checkbox is checked or false if not
         isSfxOn = PreferenceManager.getDefaultSharedPreferences(this).getBoolean("SETTINGS_CB", true);
     }
 
     public void tryAgain(View view){
         if(isSfxOn)
             MainActivity.gameBtnSfxSound.start();
-        startActivity(new Intent(getApplicationContext(),NewGame.class));
+            startActivity(new Intent(getApplicationContext(),NewGame.class));
     }
 
     public void mainMenuClick(View view){
         if(isSfxOn)
             MainActivity.gameBtnSfxSound.start();
-        startActivity(new Intent(getApplicationContext(),MainActivity.class));
+            startActivity(new Intent(getApplicationContext(),MainActivity.class));
     }
 
     @Override
     public void onBackPressed() {
-        //super.onBackPressed();
         startActivity(new Intent(getApplicationContext(),MainActivity.class));
     }
 

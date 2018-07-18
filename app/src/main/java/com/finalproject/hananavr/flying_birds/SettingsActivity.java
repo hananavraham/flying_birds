@@ -29,6 +29,7 @@ public class SettingsActivity extends AppCompatActivity implements SeekBar.OnSee
         cbSfxSounds = findViewById(R.id.cbSfxSounds);
         ivSound = findViewById(R.id.ivSound);
 
+        //Setting the seekbar progress to the current phone volume progress
         audioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
         sbVolume.setMax(audioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC));
         sbVolume.setProgress(audioManager.getStreamVolume(AudioManager.STREAM_MUSIC));
