@@ -9,8 +9,8 @@ import android.view.View;
 import android.widget.Toast;
 
 public class Shooter extends View {
-    int xPos;
-    int yPos;
+    float xPos;
+    float yPos;
     int draw_flg;
     int motion_flg;
     int firstTimeFlg;
@@ -18,7 +18,7 @@ public class Shooter extends View {
     Bitmap[] shooterRightMotion;
     Bitmap[] shooterLeftMotion;
 
-    public Shooter(Context context, int x, int y) {
+    public Shooter(Context context, float x, float y) {
         super(context);
         this.xPos = x;
         this.yPos = y;

@@ -59,7 +59,7 @@ public class Game extends View {
         whiteBirdClicksToKill = 8;
         gameOver = 0;
 
-        shooter = new Shooter(context, Resources.getSystem().getDisplayMetrics().widthPixels/2-90, Resources.getSystem().getDisplayMetrics().heightPixels-630);
+        shooter = new Shooter(context,(float)(Resources.getSystem().getDisplayMetrics().widthPixels/2 * 0.88), (float)(Resources.getSystem().getDisplayMetrics().heightPixels * 0.41));
 
         //Setting in game fonts style
         fontSize = getResources().getDimensionPixelSize(R.dimen.inGameFontSize);

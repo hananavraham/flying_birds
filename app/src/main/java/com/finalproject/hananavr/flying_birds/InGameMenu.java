@@ -38,15 +38,15 @@ public class InGameMenu {
     }
 
     public void draw(Canvas canvas, int soundsToogle){
-        canvas.drawBitmap(igmBackground, 750,200,null);
-        canvas.drawBitmap(resumeGame,820, 285, null );
-        canvas.drawBitmap(restartGame,820, 385, null );
-        canvas.drawBitmap(mainMenu,820, 485, null );
+        canvas.drawBitmap(igmBackground, (float)(Resources.getSystem().getDisplayMetrics().widthPixels * 0.415), (float)(Resources.getSystem().getDisplayMetrics().heightPixels * 0.185),null);
+        canvas.drawBitmap(resumeGame,(float)(Resources.getSystem().getDisplayMetrics().widthPixels * 0.452), (float)(Resources.getSystem().getDisplayMetrics().heightPixels * 0.27), null );
+        canvas.drawBitmap(restartGame,(float)(Resources.getSystem().getDisplayMetrics().widthPixels * 0.452), (float)(Resources.getSystem().getDisplayMetrics().heightPixels * 0.36), null );
+        canvas.drawBitmap(mainMenu,(float)(Resources.getSystem().getDisplayMetrics().widthPixels * 0.452),  (float)(Resources.getSystem().getDisplayMetrics().heightPixels * 0.45), null );
         if(soundsToogle == 0){
-            canvas.drawBitmap(soundsToogleOn,820, 575, null );
+            canvas.drawBitmap(soundsToogleOn,(float)(Resources.getSystem().getDisplayMetrics().widthPixels * 0.452), (float)(Resources.getSystem().getDisplayMetrics().heightPixels * 0.54), null );
         }
         if(soundsToogle == 1){
-            canvas.drawBitmap(soundsToogleOff,820, 575, null );
+            canvas.drawBitmap(soundsToogleOff,(float)(Resources.getSystem().getDisplayMetrics().widthPixels * 0.452), (float)(Resources.getSystem().getDisplayMetrics().heightPixels * 0.54), null );
         }
 
     }
